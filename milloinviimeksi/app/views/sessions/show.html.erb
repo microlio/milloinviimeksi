@@ -1,0 +1,23 @@
+<section>
+
+  <h1>Login</h1>
+
+  <% form_for :user do |f| %>
+    <%= f.error_messages %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+      <%= f.submit 'Login' %>
+
+  <% end %>
+
+
+</section>

@@ -1,0 +1,17 @@
+section{
+  display: block;
+}
+
+.warning{
+	background-color: pink;
+	border: thin solid red;
+	padding: 0.5em;
+	
+}
+
+.notice{
+	background-color: #CFC;;
+	border: thin solid green;
+	padding: 0.5em;
+	
+}

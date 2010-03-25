@@ -1,0 +1,20 @@
+<html>
+<head>
+    <%= stylesheet_link_tag 'style' %>
+    <title>milloin viimeex</title>
+</head>
+<body>
+    <% if session[:user_id]%>
+        <p>You are logged in <%= link_to 'Logout', :session, :method => :delete %></p>
+    <% end %>
+    
+    <% if flash[:warning] %>
+    	<section class="warning"><%= flash[:warning]%></section>
+    <% end %>
+    <% if flash[:notice] %>
+    	<section class="notice"><%= flash[:notice]%></section>
+    <% end %>
+    
+    <%= yield %>
+</body>
+</html>
