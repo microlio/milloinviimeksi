@@ -1,0 +1,37 @@
+<section>
+
+  <% if session[:user_id]%>
+      <section class="warning">Olet kirjautunut</section>
+  <% else %>
+      <section class="warning">Et ole kirjautunut</section>
+  <% end %>
+
+  <% if flash[:warning] %>
+      <section class="warning"><% flash[:warning]%></section>
+  <% end %>
+
+  <% if flash[:notice] %>
+      <section class="notice"><% flash[:notice]%></section>
+  <% end %>
+
+  <h1><%= 'login'%></h1>
+
+  <% form_for :session, :url => {:action => "create"}do |f| %>
+    <%= f.error_messages %>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+      <%= f.submit %>
+
+  <% end %>
+
+
+</section>
