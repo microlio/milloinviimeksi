@@ -1,0 +1,11 @@
+<p>
+  <b>Name:</b>
+  <%=h @event.name %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%=h @event.time.strftime("%d.%m.%Y %H:%M") %>
+</p>
+
+<%= link_to 'Back', events_path %>
