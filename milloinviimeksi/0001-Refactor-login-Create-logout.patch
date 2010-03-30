@@ -1,0 +1,2570 @@
+From 6522ee84ebc9046eb7beba4c567372461bb405e6 Mon Sep 17 00:00:00 2001
+From: Juho Kilpikoski <juho.kilpikoski@iki.fi>
+Date: Thu, 25 Mar 2010 20:00:45 +0200
+Subject: [PATCH] Refactor login; Create logout
+
+Old code was not following convention: controller names were not in plural.
+---
+ .../app/controllers/application_controller.rb      |    9 +
+ .../app/controllers/session_controller.rb          |   28 -
+ .../app/controllers/sessions_controller.rb         |   31 +
+ milloinviimeksi/app/controllers/user_controller.rb |   35 -
+ .../app/controllers/users_controller.rb            |   35 +
+ milloinviimeksi/app/models/user.rb                 |   34 +-
+ .../app/views/layouts/application.html.erb         |   20 +
+ milloinviimeksi/app/views/session/create.html.erb  |    2 -
+ milloinviimeksi/app/views/session/destroy.html.erb |    2 -
+ milloinviimeksi/app/views/session/show.html.erb    |   37 -
+ milloinviimeksi/app/views/sessions/show.html.erb   |   23 +
+ milloinviimeksi/app/views/user/create.html.erb     |    2 -
+ milloinviimeksi/app/views/user/destroy.html.erb    |    2 -
+ milloinviimeksi/app/views/user/edit.html.erb       |    2 -
+ milloinviimeksi/app/views/user/new.html.erb        |    2 -
+ milloinviimeksi/app/views/user/show.html.erb       |    2 -
+ milloinviimeksi/app/views/user/update.html.erb     |    2 -
+ milloinviimeksi/app/views/users/create.html.erb    |    2 +
+ milloinviimeksi/app/views/users/destroy.html.erb   |    2 +
+ milloinviimeksi/app/views/users/edit.html.erb      |    2 +
+ milloinviimeksi/app/views/users/new.html.erb       |    2 +
+ milloinviimeksi/app/views/users/show.html.erb      |    2 +
+ milloinviimeksi/app/views/users/update.html.erb    |    2 +
+ milloinviimeksi/config/routes.rb                   |    6 +-
+ milloinviimeksi/db/development.sqlite3             |  Bin 10240 -> 10240 bytes
+ milloinviimeksi/log/development.log                | 1989 ++++++++++++++++++++
+ milloinviimeksi/public/stylesheets/style.css       |   17 +
+ 27 files changed, 2163 insertions(+), 129 deletions(-)
+ delete mode 100644 milloinviimeksi/app/controllers/session_controller.rb
+ create mode 100644 milloinviimeksi/app/controllers/sessions_controller.rb
+ delete mode 100644 milloinviimeksi/app/controllers/user_controller.rb
+ create mode 100644 milloinviimeksi/app/controllers/users_controller.rb
+ create mode 100644 milloinviimeksi/app/views/layouts/application.html.erb
+ delete mode 100644 milloinviimeksi/app/views/session/create.html.erb
+ delete mode 100644 milloinviimeksi/app/views/session/destroy.html.erb
+ delete mode 100644 milloinviimeksi/app/views/session/show.html.erb
+ create mode 100644 milloinviimeksi/app/views/sessions/show.html.erb
+ delete mode 100644 milloinviimeksi/app/views/user/create.html.erb
+ delete mode 100644 milloinviimeksi/app/views/user/destroy.html.erb
+ delete mode 100644 milloinviimeksi/app/views/user/edit.html.erb
+ delete mode 100644 milloinviimeksi/app/views/user/new.html.erb
+ delete mode 100644 milloinviimeksi/app/views/user/show.html.erb
+ delete mode 100644 milloinviimeksi/app/views/user/update.html.erb
+ create mode 100644 milloinviimeksi/app/views/users/create.html.erb
+ create mode 100644 milloinviimeksi/app/views/users/destroy.html.erb
+ create mode 100644 milloinviimeksi/app/views/users/edit.html.erb
+ create mode 100644 milloinviimeksi/app/views/users/new.html.erb
+ create mode 100644 milloinviimeksi/app/views/users/show.html.erb
+ create mode 100644 milloinviimeksi/app/views/users/update.html.erb
+ create mode 100644 milloinviimeksi/public/stylesheets/style.css
+
+diff --git a/milloinviimeksi/app/controllers/application_controller.rb b/milloinviimeksi/app/controllers/application_controller.rb
+index 6635a3f..3592304 100644
+--- a/milloinviimeksi/app/controllers/application_controller.rb
++++ b/milloinviimeksi/app/controllers/application_controller.rb
+@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
+   helper :all # include all helpers, all the time
+   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+ 
++  before_filter :authenticate_required
++
++  def authenticate_required
++    unless session[:user_id]
++      redirect_to session_path
++      return false
++    end
++  end
++
+   # Scrub sensitive parameters from your log
+   # filter_parameter_logging :password
+ end
+diff --git a/milloinviimeksi/app/controllers/session_controller.rb b/milloinviimeksi/app/controllers/session_controller.rb
+deleted file mode 100644
+index bd4c8d7..0000000
+--- a/milloinviimeksi/app/controllers/session_controller.rb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-class SessionController < ApplicationController
+-  def create
+-    
+-    begin
+-      user = User.authenticate(params[:user][:name], params[:user][:password])
+-    rescue
+-      flash[:warning] = 'epicfail'
+-      redirect_to session_path
+-      return
+-    end
+-
+-    flash[:notice] = 'ok'
+-    log_user_in user
+-    redirect_to root_path
+-
+-  end
+-
+-  def log_user_in user
+-    session[:user_id] = user.id if user
+-  end
+-
+-  def destroy
+-  end
+-
+-  def show
+-  end
+-
+-end
+diff --git a/milloinviimeksi/app/controllers/sessions_controller.rb b/milloinviimeksi/app/controllers/sessions_controller.rb
+new file mode 100644
+index 0000000..58c2e68
+--- /dev/null
++++ b/milloinviimeksi/app/controllers/sessions_controller.rb
+@@ -0,0 +1,31 @@
++class SessionsController < ApplicationController
++  skip_before_filter :authenticate_required, :only => [:show, :create]
++
++  def create
++    begin
++      user = User.authenticate(params[:user][:name], params[:user][:password])
++    rescue
++      flash[:warning] = 'You shall not pass!'
++      redirect_to session_path
++      return
++    end
++
++    flash[:notice] = 'Multipass!'
++    log_user_in user
++    redirect_to user
++
++  end
++
++  def log_user_in user
++    session[:user_id] = user.id if user
++  end
++
++  def destroy
++    reset_session
++    redirect_to session_path
++  end
++
++  def show
++  end
++
++end
+diff --git a/milloinviimeksi/app/controllers/user_controller.rb b/milloinviimeksi/app/controllers/user_controller.rb
+deleted file mode 100644
+index 68a28a7..0000000
+--- a/milloinviimeksi/app/controllers/user_controller.rb
++++ /dev/null
+@@ -1,35 +0,0 @@
+-class UserController < ApplicationController
+-  def new
+-  end
+-
+-  def create
+-    @user = User.new
+-
+-    @user.name = params[:user][:name]
+-    @user.salt = Time.now
+-    @user.password = params[:user][:password]
+-
+-    if @user.save
+-
+-      flash[:notice] = 'ok'
+-      redirect_to sessions_path
+-    else
+-      render :action => "new"
+-    end
+-    
+-
+-  end
+-
+-  def edit
+-  end
+-
+-  def update
+-  end
+-
+-  def show
+-  end
+-
+-  def destroy
+-  end
+-
+-end
+diff --git a/milloinviimeksi/app/controllers/users_controller.rb b/milloinviimeksi/app/controllers/users_controller.rb
+new file mode 100644
+index 0000000..df4b499
+--- /dev/null
++++ b/milloinviimeksi/app/controllers/users_controller.rb
+@@ -0,0 +1,35 @@
++class UsersController < ApplicationController
++  def new
++  end
++
++  def create
++    @user = User.new
++
++    @user.name = params[:user][:name]
++    @user.salt = Time.now
++    @user.password = params[:user][:password]
++
++    if @user.save
++
++      flash[:notice] = 'ok'
++      redirect_to sessions_path
++    else
++      render :action => "new"
++    end
++
++  end
++
++  def edit
++  end
++
++  def update
++  end
++
++  def show
++    @user = User.find params[:id]
++  end
++
++  def destroy
++  end
++
++end
+diff --git a/milloinviimeksi/app/models/user.rb b/milloinviimeksi/app/models/user.rb
+index 6c0f0ff..573129e 100644
+--- a/milloinviimeksi/app/models/user.rb
++++ b/milloinviimeksi/app/models/user.rb
+@@ -1,33 +1,47 @@
++require 'digest/sha2'
++
+ class User < ActiveRecord::Base
+ 
+   attr_accessor :password, :password_confirmation
+ 
++  validates_presence_of :name
++  validates_uniqueness_of :name
++
++  before_create :create_salt
+   before_save :hash_password
+ 
++# u = User.new :name => 'kisu', :password => 'kisu'
++
++  def correct_password? pwd
++    return User.hash_plaintext_password(pwd, self.salt) == hashed_password
++  end
++
+   private
+ 
+-  def self.hash_plaintext_password pwd
+-    (pwd.reverse)
++  def self.hash_plaintext_password pwd, salt
++    crypter = Digest::SHA2.new(512)
++    crypter << salt
++    crypter << pwd
++    crypter.to_s
++  end
++
++
++  def create_salt
++    self.salt = "#{Time.now.strftime('%s')}#{Thread.current.object_id}"
+   end
+ 
+   def hash_password
+     return if self.password.blank?
+-    self.hashed_password = User.hash_plaintext_password(self.password)
++    create_salt unless salt
++    self.hashed_password = User.hash_plaintext_password(self.password, self.salt)
+   end
+ 
+   def self.authenticate name, password
+     user = User.find_by_name name
+-
+     unless user and user.correct_password? password
+       raise ArgumentError.new "Authentication failed"
+     end
+-
+     return user
+ 
+   end
+-
+-  def correct_password? pwd
+-    return User.hash_plaintext_password(pwd) == hashed_password
+-  end
+-
+ end
+diff --git a/milloinviimeksi/app/views/layouts/application.html.erb b/milloinviimeksi/app/views/layouts/application.html.erb
+new file mode 100644
+index 0000000..d9b9fef
+--- /dev/null
++++ b/milloinviimeksi/app/views/layouts/application.html.erb
+@@ -0,0 +1,20 @@
++<html>
++<head>
++    <%= stylesheet_link_tag 'style' %>
++    <title>milloin viimeex</title>
++</head>
++<body>
++    <% if session[:user_id]%>
++        <p>You are logged in <%= link_to 'Logout', :session, :method => :delete %></p>
++    <% end %>
++    
++    <% if flash[:warning] %>
++    	<section class="warning"><%= flash[:warning]%></section>
++    <% end %>
++    <% if flash[:notice] %>
++    	<section class="notice"><%= flash[:notice]%></section>
++    <% end %>
++    
++    <%= yield %>
++</body>
++</html>
+\ No newline at end of file
+diff --git a/milloinviimeksi/app/views/session/create.html.erb b/milloinviimeksi/app/views/session/create.html.erb
+deleted file mode 100644
+index 6e13ad3..0000000
+--- a/milloinviimeksi/app/views/session/create.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>Session#create</h1>
+-<p>Find me in app/views/session/create.html.erb</p>
+diff --git a/milloinviimeksi/app/views/session/destroy.html.erb b/milloinviimeksi/app/views/session/destroy.html.erb
+deleted file mode 100644
+index 4b06ffe..0000000
+--- a/milloinviimeksi/app/views/session/destroy.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>Session#destroy</h1>
+-<p>Find me in app/views/session/destroy.html.erb</p>
+diff --git a/milloinviimeksi/app/views/session/show.html.erb b/milloinviimeksi/app/views/session/show.html.erb
+deleted file mode 100644
+index bb9d1a4..0000000
+--- a/milloinviimeksi/app/views/session/show.html.erb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-<section>
+-
+-  <% if session[:user_id]%>
+-      <section class="warning">Olet kirjautunut</section>
+-  <% else %>
+-      <section class="warning">Et ole kirjautunut</section>
+-  <% end %>
+-
+-  <% if flash[:warning] %>
+-      <section class="warning"><% flash[:warning]%></section>
+-  <% end %>
+-
+-  <% if flash[:notice] %>
+-      <section class="notice"><% flash[:notice]%></section>
+-  <% end %>
+-
+-  <h1><%= 'login'%></h1>
+-
+-  <% form_for :session, :url => {:action => "create"}do |f| %>
+-    <%= f.error_messages %>
+-
+-  <div>
+-    <%= f.label :name %>
+-    <%= f.text_field :name %>
+-  </div>
+-
+-  <div>
+-    <%= f.label :password %>
+-    <%= f.password_field :password %>
+-  </div>
+-
+-      <%= f.submit %>
+-
+-  <% end %>
+-
+-
+-</section>
+\ No newline at end of file
+diff --git a/milloinviimeksi/app/views/sessions/show.html.erb b/milloinviimeksi/app/views/sessions/show.html.erb
+new file mode 100644
+index 0000000..9313f91
+--- /dev/null
++++ b/milloinviimeksi/app/views/sessions/show.html.erb
+@@ -0,0 +1,23 @@
++<section>
++
++  <h1>Login</h1>
++
++  <% form_for :user do |f| %>
++    <%= f.error_messages %>
++
++  <div>
++    <%= f.label :name %>
++    <%= f.text_field :name %>
++  </div>
++
++  <div>
++    <%= f.label :password %>
++    <%= f.password_field :password %>
++  </div>
++
++      <%= f.submit 'Login' %>
++
++  <% end %>
++
++
++</section>
+\ No newline at end of file
+diff --git a/milloinviimeksi/app/views/user/create.html.erb b/milloinviimeksi/app/views/user/create.html.erb
+deleted file mode 100644
+index 4ceeba1..0000000
+--- a/milloinviimeksi/app/views/user/create.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>User#create</h1>
+-<p>Find me in app/views/user/create.html.erb</p>
+diff --git a/milloinviimeksi/app/views/user/destroy.html.erb b/milloinviimeksi/app/views/user/destroy.html.erb
+deleted file mode 100644
+index a328fb9..0000000
+--- a/milloinviimeksi/app/views/user/destroy.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>User#destroy</h1>
+-<p>Find me in app/views/user/destroy.html.erb</p>
+diff --git a/milloinviimeksi/app/views/user/edit.html.erb b/milloinviimeksi/app/views/user/edit.html.erb
+deleted file mode 100644
+index 21cbe9f..0000000
+--- a/milloinviimeksi/app/views/user/edit.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>User#edit</h1>
+-<p>Find me in app/views/user/edit.html.erb</p>
+diff --git a/milloinviimeksi/app/views/user/new.html.erb b/milloinviimeksi/app/views/user/new.html.erb
+deleted file mode 100644
+index 8e6ddd5..0000000
+--- a/milloinviimeksi/app/views/user/new.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>User#new</h1>
+-<p>Find me in app/views/user/new.html.erb</p>
+diff --git a/milloinviimeksi/app/views/user/show.html.erb b/milloinviimeksi/app/views/user/show.html.erb
+deleted file mode 100644
+index 301bd6e..0000000
+--- a/milloinviimeksi/app/views/user/show.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>User#show</h1>
+-<p>Find me in app/views/user/show.html.erb</p>
+diff --git a/milloinviimeksi/app/views/user/update.html.erb b/milloinviimeksi/app/views/user/update.html.erb
+deleted file mode 100644
+index 01ff3a6..0000000
+--- a/milloinviimeksi/app/views/user/update.html.erb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-<h1>User#update</h1>
+-<p>Find me in app/views/user/update.html.erb</p>
+diff --git a/milloinviimeksi/app/views/users/create.html.erb b/milloinviimeksi/app/views/users/create.html.erb
+new file mode 100644
+index 0000000..4ceeba1
+--- /dev/null
++++ b/milloinviimeksi/app/views/users/create.html.erb
+@@ -0,0 +1,2 @@
++<h1>User#create</h1>
++<p>Find me in app/views/user/create.html.erb</p>
+diff --git a/milloinviimeksi/app/views/users/destroy.html.erb b/milloinviimeksi/app/views/users/destroy.html.erb
+new file mode 100644
+index 0000000..a328fb9
+--- /dev/null
++++ b/milloinviimeksi/app/views/users/destroy.html.erb
+@@ -0,0 +1,2 @@
++<h1>User#destroy</h1>
++<p>Find me in app/views/user/destroy.html.erb</p>
+diff --git a/milloinviimeksi/app/views/users/edit.html.erb b/milloinviimeksi/app/views/users/edit.html.erb
+new file mode 100644
+index 0000000..af9d080
+--- /dev/null
++++ b/milloinviimeksi/app/views/users/edit.html.erb
+@@ -0,0 +1,2 @@
++<h1>User#edit</h1>
++<pre><%= @user.inspect %></pre>
+diff --git a/milloinviimeksi/app/views/users/new.html.erb b/milloinviimeksi/app/views/users/new.html.erb
+new file mode 100644
+index 0000000..8e6ddd5
+--- /dev/null
++++ b/milloinviimeksi/app/views/users/new.html.erb
+@@ -0,0 +1,2 @@
++<h1>User#new</h1>
++<p>Find me in app/views/user/new.html.erb</p>
+diff --git a/milloinviimeksi/app/views/users/show.html.erb b/milloinviimeksi/app/views/users/show.html.erb
+new file mode 100644
+index 0000000..301bd6e
+--- /dev/null
++++ b/milloinviimeksi/app/views/users/show.html.erb
+@@ -0,0 +1,2 @@
++<h1>User#show</h1>
++<p>Find me in app/views/user/show.html.erb</p>
+diff --git a/milloinviimeksi/app/views/users/update.html.erb b/milloinviimeksi/app/views/users/update.html.erb
+new file mode 100644
+index 0000000..01ff3a6
+--- /dev/null
++++ b/milloinviimeksi/app/views/users/update.html.erb
+@@ -0,0 +1,2 @@
++<h1>User#update</h1>
++<p>Find me in app/views/user/update.html.erb</p>
+diff --git a/milloinviimeksi/config/routes.rb b/milloinviimeksi/config/routes.rb
+index 77768a8..497716b 100644
+--- a/milloinviimeksi/config/routes.rb
++++ b/milloinviimeksi/config/routes.rb
+@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
+ 
+   # Sample resource route with sub-resources:
+   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
+-  
++
+   # Sample resource route with more complex sub-resources
+   #   map.resources :products do |products|
+   #     products.resources :comments
+@@ -38,8 +38,8 @@ ActionController::Routing::Routes.draw do |map|
+   # Install the default routes as the lowest priority.
+   # Note: These default routes make all actions in every controller accessible via GET requests. You should
+   # consider removing or commenting them out if you're using named routes and resources.
+-  map.connect ':controller/:action/:id'
+-  map.connect ':controller/:action/:id.:format'
++  # map.connect ':controller/:action/:id'
++  # map.connect ':controller/:action/:id.:format'
+ 
+   map.resource :session
+   map.resources :users
+diff --git a/milloinviimeksi/db/development.sqlite3 b/milloinviimeksi/db/development.sqlite3
+index 92a32aad771f32f405d6c6804ec8a0af029ee757..6597b681803a9eff560e72a1f46941ae8a6cb274 100644
+GIT binary patch
+delta 339
+zcmZWjOG*Pl6r9;4S!lpT5K*xAA^JZ3rn~0=f{Q?eT%bSGBxIK`>qJlB9Xx?}1W(|?
+zJ9rE2xD$Esswk@7tHa{3c)qMJUa!8+PwJtmhGy__oVT;l`(R(+PVOI=H|t%$T=i=1
+zw~9oeYl&NOY6=9P2oU<+dQ*TD6ltm)wM?x;C8V}~uKLyT=$Zk~j(Jm6)n_%CKb@A_
+zk9XryHIZLl{vb6@*gDjNdu@r0(U7CI9KB#{EQS<9@&&9o>By!iAu%{7m>lN7jZT<S
+z=h1rc##$^ffDG6%nUulDOg@C**>>4z$vT+Gm_o5(PA-%kA~$>!4K~t%ra$dljjiba
+L(#!Yts2=|S`T$mf
+
+delta 161
+zcmZn&Xb6}f&B(e@=7l&16MH`c`$_ix&4L`w?DZB*><qFD!p6o0soB|y6+n=lZe(C+
+zple{PYh<cmXk=w-U}b2EMaYzqok1L-6J48$rInEhsy46?F9QPuBl}kdAOeETd<q}g
+G8JPfBVkAER
+
+diff --git a/milloinviimeksi/log/development.log b/milloinviimeksi/log/development.log
+index 23e5769..d11bf99 100644
+--- a/milloinviimeksi/log/development.log
++++ b/milloinviimeksi/log/development.log
+@@ -279,3 +279,1992 @@ ActionController::UnknownAction (No action responded to index. Actions: create,
+   -e:1
+ 
+ Rendering rescues/layout (not_found)
++
++
++Processing ApplicationController#index (for 127.0.0.1 at 2010-03-25 16:22:16) [GET]
++
++ActionController::RoutingError (No route matches "/sessions" with {:method=>:get}):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing ApplicationController#index (for 127.0.0.1 at 2010-03-25 16:22:18) [GET]
++
++ActionController::RoutingError (No route matches "/sessions/show" with {:method=>:get}):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing ApplicationController#index (for 127.0.0.1 at 2010-03-25 16:22:21) [GET]
++
++ActionController::RoutingError (No route matches "/sessions/new" with {:method=>:get}):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:22:23) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:22:27) [GET]
++Rendering session/show
++Completed in 34ms (View: 32, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:22:31) [POST]
++  Parameters: {"commit"=>"Save changes", "session"=>{"name"=>"afij", "password"=>"sdglh"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:22:31) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:36:19) [GET]
++Rendering session/show
++Completed in 8ms (View: 7, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:36:59) [GET]
++Rendering session/show
++Completed in 9ms (View: 8, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:52:30) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"oigsa", "password"=>"fhsgagpri"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session
++Completed in 19ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:52:30) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:53:42) [GET]
++Rendering session/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:53:44) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:53:44) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing ApplicationController#show (for 127.0.0.1 at 2010-03-25 16:53:58) [GET]
++
++SyntaxError (/Users/juki/Desktop/milloinviimeksi/milloinviimeksi/app/controllers/session_controller.rb:14: syntax error, unexpected ':', expecting kEND
++    redirect_to session_path, url: {action: "show"}
++                                  ^
++/Users/juki/Desktop/milloinviimeksi/milloinviimeksi/app/controllers/session_controller.rb:14: odd number list for Hash
++    redirect_to session_path, url: {action: "show"}
++                                           ^
++/Users/juki/Desktop/milloinviimeksi/milloinviimeksi/app/controllers/session_controller.rb:14: syntax error, unexpected '}', expecting kEND
++/Users/juki/Desktop/milloinviimeksi/milloinviimeksi/app/controllers/session_controller.rb:28: syntax error, unexpected $end, expecting kEND):
++  
++
++Rendered rescues/_trace (29.2ms)
++Rendered rescues/_request_and_response (1.1ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing ApplicationController#show (for 127.0.0.1 at 2010-03-25 16:54:19) [GET]
++
++SyntaxError (/Users/juki/Desktop/milloinviimeksi/milloinviimeksi/app/controllers/session_controller.rb:14: syntax error, unexpected ':', expecting kEND
++    redirect_to session_path, url: {:action =>  "show"}
++                                  ^):
++  
++
++Rendered rescues/_trace (30.7ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:54:27) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:54:29) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:54:29) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:54:41) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:54:43) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:54:44) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:55:27) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:55:29) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:55:29) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:55:51) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:55:52) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 16:55:52) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:05) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:07) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 5ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:07) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:07) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:07) [GET]
++Rendering session/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:08) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:08) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:08) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:08) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:08) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:08) [GET]
++Rendering session/show
++Completed in 6ms (View: 4, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:09) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:09) [GET]
++Rendering session/show
++Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:24) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"pekka", "password"=>"pekka"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:24) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:49) [GET]
++Rendering session/show
++Completed in 8ms (View: 7, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:51) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:56:53) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisfa", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:56:53) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:57:23) [GET]
++Rendering session/show
++Completed in 8ms (View: 7, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:57:26) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"asglkj", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:57:26) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++  [4;36;1mUser Create (0.6ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', NULL, '2010-03-25 14:58:44', '2010-03-25 14:58:44', 'anasalas')[0m
++  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" [0m
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:58:58) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 5ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:58:58) [GET]
++Rendering session/show
++Completed in 25ms (View: 23, DB: 0) | 200 OK [http://localhost/session/show]
++  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:59:32) [GET]
++Rendering session/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:59:50) [GET]
++Rendering session/show
++Completed in 9ms (View: 7, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 16:59:53) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"asfj", "password"=>"dklaf"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 16:59:53) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:00:27) [GET]
++Rendering session/show
++Completed in 9ms (View: 8, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:00:29) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:00:29) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:00:38) [GET]
++Rendering session/show
++Completed in 9ms (View: 8, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:00:39) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:00:39) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:00:48) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:16:51) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"jkljgsd", "password"=>"dsjkh"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:16:52) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:26:58) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:27:02) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:27:02) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:27:17) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:27:17) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:28:20) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:28:22) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:28:22) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:28:27) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:28:27) [GET]
++Rendering session/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:28:47) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:28:49) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"af", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 4ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:28:49) [GET]
++Rendering session/show
++Completed in 71ms (View: 69, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:29:51) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:29:56) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++NoMethodError (You have a nil object when you didn't expect it!
++You might have expected an instance of ActiveRecord::Base.
++The error occurred while evaluating nil.[]):
++  app/controllers/session_controller.rb:5:in `create'
++
++Rendered rescues/_trace (34.8ms)
++Rendered rescues/_request_and_response (1.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:30:46) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:30:46) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:30:52) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:30:52) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:31:04) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:31:09) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++Redirected to http://localhost:3000/session/show
++Completed in 3ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:31:09) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing ApplicationController#show (for 127.0.0.1 at 2010-03-25 17:31:17) [GET]
++
++SyntaxError (/Users/juki/Desktop/milloinviimeksi/milloinviimeksi/app/controllers/session_controller.rb:28: syntax error, unexpected $end, expecting kEND):
++  
++
++Rendered rescues/_trace (30.4ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:31:24) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:31:28) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++RuntimeError (, ):
++  app/models/user.rb:19:in `authenticate'
++  app/controllers/session_controller.rb:5:in `create'
++
++Rendered rescues/_trace (33.0ms)
++Rendered rescues/_request_and_response (0.5ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:31:36) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++RuntimeError (kisu, salasana):
++  app/models/user.rb:19:in `authenticate'
++  app/controllers/session_controller.rb:5:in `create'
++
++Rendered rescues/_trace (31.7ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:32:04) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++
++NameError (undefined local variable or method `user' for #<Class:0x1035caec8>):
++  app/models/user.rb:20:in `authenticate'
++  app/controllers/session_controller.rb:5:in `create'
++
++Rendered rescues/_trace (32.3ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:32:13) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 17:32:14) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:32:21) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:32:45) [GET]
++Rendering session/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:32:48) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"juki", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'juki') LIMIT 1[0m
++
++ArgumentError (Authentication failed):
++  app/models/user.rb:24:in `authenticate'
++  app/controllers/session_controller.rb:5:in `create'
++
++Rendered rescues/_trace (30.2ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:32:57) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++
++NoMethodError (Attempt to call private method):
++  app/models/user.rb:23:in `authenticate'
++  app/controllers/session_controller.rb:5:in `create'
++
++Rendered rescues/_trace (33.2ms)
++Rendered rescues/_request_and_response (0.4ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:34:11) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++
++NoMethodError (Attempt to call private method):
++  app/models/user.rb:27:in `authenticate'
++  app/controllers/session_controller.rb:5:in `create'
++
++Rendered rescues/_trace (32.5ms)
++Rendered rescues/_request_and_response (0.4ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:34:23) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 17:34:24) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:34:30) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:41:43) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:41:46) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session/show
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:41:47) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 17:42:09) [GET]
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 17:42:10) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = '') LIMIT 1[0m
++Rendering session/create
++Completed in 23ms (View: 17, DB: 0) | 200 OK [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 18:58:02) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 9ms (View: 8, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 18:58:34) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 10ms (View: 8, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 18:58:36) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = '') LIMIT 1[0m
++Redirected to http://localhost:3000/session/show
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 18:58:36) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 18:59:56) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 10ms (View: 8, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#create (for 127.0.0.1 at 2010-03-25 18:59:58) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = '') LIMIT 1[0m
++Redirected to http://localhost:3000/session/show
++Completed in 5ms (DB: 0) | 302 Found [http://localhost/session/create]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 18:59:58) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:00:24) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 72ms (View: 4, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:02:04) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 14ms (View: 12, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:02:21) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 13ms (View: 11, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:03:40) [GET]
++Rendering template within layouts/application
++Rendering session/show
++
++ActionView::TemplateError (uninitialized constant ActionView::Base::CompiledTemplates::Logout) on line #8 of app/views/layouts/application.html.erb:
++5: </head>
++6: <body>
++7:     <% if session[:user_id]%>
++8:         <p>You are logged in <%= link_to Logout, :sessions, :method => :delete %></p>
++9:     <% else %>
++10:         <p>You are not logged in</p>
++11:     <% end %>
++
++    app/views/layouts/application.html.erb:8
++
++Rendered rescues/_trace (41.7ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:04:06) [GET]
++Rendering template within layouts/application
++Rendering session/show
++
++ActionView::TemplateError (undefined method `sessions_path' for #<ActionView::Base:0x1033536b8>) on line #8 of app/views/layouts/application.html.erb:
++5: </head>
++6: <body>
++7:     <% if session[:user_id]%>
++8:         <p>You are logged in <%= link_to 'Logout', :sessions, :method => :delete %></p>
++9:     <% else %>
++10:         <p>You are not logged in</p>
++11:     <% end %>
++
++    app/views/layouts/application.html.erb:8
++
++Rendered rescues/_trace (45.0ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:04:12) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 11ms (View: 9, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 19:04:14) [DELETE]
++  Parameters: {"authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 19:05:30) [DELETE]
++  Parameters: {"authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 19:05:31) [GET]
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:05:35) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 19:05:37) [DELETE]
++  Parameters: {"authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:06:22) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 7ms (View: 6, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 19:06:23) [DELETE]
++  Parameters: {"authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 19:06:26) [DELETE]
++  Parameters: {"authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:06:52) [GET]
++Rendering template within layouts/application
++Rendering session/show
++
++ActionView::TemplateError (undefined method `sessions_path' for #<ActionView::Base:0x103412310>) on line #8 of app/views/layouts/application.html.erb:
++5: </head>
++6: <body>
++7:     <% if session[:user_id]%>
++8:         <p>You are logged in <%= link_to 'Logout', :sessions, :method => :delete %></p>
++9:     <% else %>
++10:         <p>You are not logged in</p>
++11:     <% end %>
++
++    app/views/layouts/application.html.erb:8
++
++Rendered rescues/_trace (115.0ms)
++Rendered rescues/_request_and_response (0.9ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionController#show (for 127.0.0.1 at 2010-03-25 19:07:50) [GET]
++Rendering template within layouts/application
++Rendering session/show
++Completed in 11ms (View: 10, DB: 0) | 200 OK [http://localhost/session/show]
++
++
++Processing SessionController#index (for 127.0.0.1 at 2010-03-25 19:07:51) [DELETE]
++  Parameters: {"authenticity_token"=>"DSTS6P0stWP0unK+/b4tr+nLcqukRxeB4e7V0Bju/2I="}
++
++ActionController::UnknownAction (No action responded to index. Actions: create, destroy, log_user_in, and show):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing SessionController#destroy (for 127.0.0.1 at 2010-03-25 19:08:01) [GET]
++
++RuntimeError (ding):
++  app/controllers/session_controller.rb:23:in `destroy'
++
++Rendered rescues/_trace (57.7ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing ApplicationController#index (for 127.0.0.1 at 2010-03-25 19:08:18) [GET]
++
++ActionController::RoutingError (No route matches "/session/destroy" with {:method=>:get}):
++  
++
++Rendering rescues/layout (not_found)
++
++
++Processing ApplicationController#show (for 127.0.0.1 at 2010-03-25 19:08:20) [GET]
++
++NameError (uninitialized constant SessionsController):
++  
++
++Rendered rescues/_trace (28.0ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:09:11) [GET]
++
++ActionView::MissingTemplate (Missing template sessions/show.erb in view path app/views):
++  
++
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:09:18) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 9ms (View: 8, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:09:21) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"rN8w13JTcWkILMfpriMszxpOm5PchO2Sdbkl8G+5vUo="}
++  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = '') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:09:21) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:09:27) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"rN8w13JTcWkILMfpriMszxpOm5PchO2Sdbkl8G+5vUo="}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:09:27) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:09:29) [DELETE]
++  Parameters: {"authenticity_token"=>"rN8w13JTcWkILMfpriMszxpOm5PchO2Sdbkl8G+5vUo="}
++
++RuntimeError (ding):
++  app/controllers/sessions_controller.rb:22:in `destroy'
++
++Rendered rescues/_trace (29.9ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:09:48) [DELETE]
++  Parameters: {"authenticity_token"=>"rN8w13JTcWkILMfpriMszxpOm5PchO2Sdbkl8G+5vUo="}
++
++NameError (undefined local variable or method `session_reset' for #<SessionsController:0x10352c5c0>):
++  app/controllers/sessions_controller.rb:22:in `destroy'
++
++Rendered rescues/_trace (30.5ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:09:59) [DELETE]
++  Parameters: {"authenticity_token"=>"rN8w13JTcWkILMfpriMszxpOm5PchO2Sdbkl8G+5vUo="}
++
++NameError (undefined local variable or method `root_path' for #<SessionsController:0x1033b0048>):
++  app/controllers/sessions_controller.rb:23:in `destroy'
++
++Rendered rescues/_trace (108.9ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:10:46) [DELETE]
++  Parameters: {"authenticity_token"=>"rN8w13JTcWkILMfpriMszxpOm5PchO2Sdbkl8G+5vUo="}
++
++ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
++  
++
++Rendered rescues/_trace (34.3ms)
++Rendered rescues/_request_and_response (0.6ms)
++Rendering rescues/layout (unprocessable_entity)
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:10:54) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:10:56) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"", "password"=>""}, "authenticity_token"=>"lXyVqQ81WR0kj47QgdzzV6wU+lsJx/ceAqJkcYPiIR0="}
++  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = '') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:10:56) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:11:01) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"lXyVqQ81WR0kj47QgdzzV6wU+lsJx/ceAqJkcYPiIR0="}
++  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:11:01) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:11:03) [DELETE]
++  Parameters: {"authenticity_token"=>"lXyVqQ81WR0kj47QgdzzV6wU+lsJx/ceAqJkcYPiIR0="}
++
++NameError (undefined local variable or method `sessions_path' for #<SessionsController:0x1036fc968>):
++  app/controllers/sessions_controller.rb:23:in `destroy'
++
++Rendered rescues/_trace (29.9ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:11:10) [DELETE]
++  Parameters: {"authenticity_token"=>"lXyVqQ81WR0kj47QgdzzV6wU+lsJx/ceAqJkcYPiIR0="}
++
++ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
++  
++
++Rendered rescues/_trace (33.3ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (unprocessable_entity)
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:11:14) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:11:20) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"15eRxcwdNTeNTPO5VI+VHoNMgfRVpiGLmL/6F0faj60="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 7ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:11:20) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:11:22) [DELETE]
++  Parameters: {"authenticity_token"=>"15eRxcwdNTeNTPO5VI+VHoNMgfRVpiGLmL/6F0faj60="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:11:22) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:11:38) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"6Las6D18XTeRsH8SNQqy+V5RhZsf5aa2dR7HBhVzqb4="}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:11:38) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:11:43) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"6Las6D18XTeRsH8SNQqy+V5RhZsf5aa2dR7HBhVzqb4="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 7ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:11:43) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++  [4;36;1mSQL (5.0ms)[0m   [0;1m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;35;1mSQL (0.9ms)[0m   [0m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;36;1mUser Load (1.6ms)[0m   [0;1mSELECT * FROM "users" [0m
++  [4;35;1mUser Load (1.2ms)[0m   [0mSELECT * FROM "users" [0m
++  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;35;1mUser Delete all (7.0ms)[0m   [0mDELETE FROM "users" WHERE 1=1[0m
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:13:15) [DELETE]
++  Parameters: {"authenticity_token"=>"6Las6D18XTeRsH8SNQqy+V5RhZsf5aa2dR7HBhVzqb4="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:13:16) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:13:38) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 75ms (View: 74, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:13:43) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"salasana"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:13:43) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++  [4;36;1mUser Create (0.7ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', NULL, '2010-03-25 17:15:44', '2010-03-25 17:15:44', 'usik')[0m
++  [4;35;1mUser Create (0.7ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', NULL, '2010-03-25 17:16:03', '2010-03-25 17:16:03', 'usik')[0m
++  [4;36;1mUser Create (0.5ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '2010-03-25 19:19:59', '2010-03-25 17:19:59', '2010-03-25 17:19:59', 'anasalas')[0m
++  [4;36;1mUser Create (0.5ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', 'Thu Mar 25 19:23:29 +0200 2010', '2010-03-25 17:23:29', '2010-03-25 17:23:29', 'usik0102 0020+ 92:32:91 52 raM uhT')[0m
++  [4;35;1mUser Delete all (3.7ms)[0m   [0mDELETE FROM "users" WHERE 1=1[0m
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', 'Thu Mar 25 19:25:01 +0200 2010', '2010-03-25 17:25:01', '2010-03-25 17:25:01', 'usik0102 0020+ 10:52:91 52 raM uhT')[0m
++  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:25:45) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 6ms (View: 4, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:25:48) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 7ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:25:48) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:25:52) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" [0m
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:26:03) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 7ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:26:03) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:26:40) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:26:40) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:27:04) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:27:06) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:27:06) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:27:38) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:27:42) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:27:42) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:28:11) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:28:13) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 6ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:28:13) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" ORDER BY users.id DESC LIMIT 1[0m
++  [4;35;1mUser Load (0.9ms)[0m   [0mSELECT * FROM "users" ORDER BY users.id DESC LIMIT 1[0m
++  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" ORDER BY users.id DESC LIMIT 1[0m
++  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" ORDER BY users.id DESC LIMIT 1[0m
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:31:46) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:31:46) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++  [4;35;1mUser Delete all (3.9ms)[0m   [0mDELETE FROM "users" WHERE 1=1[0m
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" [0m
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;36;1mUser Create (0.4ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', 'Thu Mar 25 19:36:34 +0200 2010', '2010-03-25 17:36:34', '2010-03-25 17:36:34', 'usik0102 0020+ 43:63:91 52 raM uhT')[0m
++  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" [0m
++  [4;36;1mUser Destroy (0.3ms)[0m   [0;1mDELETE FROM "users" WHERE "id" = 9[0m
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" [0m
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" [0m
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" [0m
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', 'Time.now.strftime(''%s'')Thread.id', '2010-03-25 17:39:14', '2010-03-25 17:39:14', '57c6455b6ac766c1d7461f7a3ef3ee7c70acd2a3c896637ce2f1553f288bf9ab8777fd3f6b432917e86ddbe947a5ff4a40969ab1b2c508263380ac9596ac14f0')[0m
++  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" [0m
++  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" [0m
++  [4;36;1mUser Destroy (0.3ms)[0m   [0;1mDELETE FROM "users" WHERE "id" = 10[0m
++  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;36;1mUser Create (0.6ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', 'Time.now.strftime(''%s'')Thread.id', '2010-03-25 17:39:40', '2010-03-25 17:39:40', '57c6455b6ac766c1d7461f7a3ef3ee7c70acd2a3c896637ce2f1553f288bf9ab8777fd3f6b432917e86ddbe947a5ff4a40969ab1b2c508263380ac9596ac14f0')[0m
++  [4;35;1mUser Load (0.6ms)[0m   [0mSELECT * FROM "users" [0m
++  [4;36;1mUser Destroy (0.3ms)[0m   [0;1mDELETE FROM "users" WHERE "id" = 11[0m
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;36;1mUser Create (0.6ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '1269538806Thread.id', '2010-03-25 17:40:06', '2010-03-25 17:40:06', 'c59c5da6828d83462b5329f00abb96f70aab4071cdc0121c5c01c99e198410d139f97ab0744e4cc6972988b29d61d7a67899d46c26ed25664cec143828a04859')[0m
++  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" [0m
++  [4;36;1mUser Destroy (0.5ms)[0m   [0;1mDELETE FROM "users" WHERE "id" = 12[0m
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;36;1mUser Create (0.4ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12695388582148237740', '2010-03-25 17:40:58', '2010-03-25 17:40:58', 'dd7d467c649652ca4f85c1771e1576e1a1d4f68a3cf7c31a42dc8b7cb7c04f3419af20634173052857bb33e42d6f741c6afea341589bbb11f5a49fa2cc5d42d2')[0m
++  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" [0m
++  [4;35;1mUser Destroy (0.4ms)[0m   [0mDELETE FROM "users" WHERE "id" = 13[0m
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12695389142148237740', '2010-03-25 17:41:54', '2010-03-25 17:41:54', 'fc483ca51c681bdbbda1bd8595e28dc5bd309951d91fb364d1ddea18a5a78811c600f01e327df0acf2abbba38ef745f4b7c31dbc601fd9b01fbc363c71656042')[0m
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:42:04) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 6, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:42:06) [DELETE]
++  Parameters: {"authenticity_token"=>"vKC7t5JgHCf6ZCFRbY8os3CrNpXaLLXwO3Lj7FuUwPE="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:42:06) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:42:09) [POST]
++  Parameters: {"commit"=>"Login", "session"=>{"name"=>"kisu", "password"=>"kisu"}, "authenticity_token"=>"fwA18xUtlS/I5qTqg+C0QtMTl4s2J6XlW21Hk8KzTFI="}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 12ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:42:09) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:42:12) [DELETE]
++  Parameters: {"authenticity_token"=>"fwA18xUtlS/I5qTqg+C0QtMTl4s2J6XlW21Hk8KzTFI="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:42:12) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:45:47) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 9ms (View: 8, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:45:50) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"sWv/ye/YgRsIAoMFkgXvIGA1Z5Efu8CiU/8I26TSzjs=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++Redirected to http://localhost:3000/session
++Completed in 7ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:45:50) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:45:55) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"sWv/ye/YgRsIAoMFkgXvIGA1Z5Efu8CiU/8I26TSzjs=", "user"=>{"name"=>"ajhf", "password"=>"ldsgh"}}
++Redirected to http://localhost:3000/session
++Completed in 5ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:45:55) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:46:17) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 9ms (View: 8, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:46:20) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"sWv/ye/YgRsIAoMFkgXvIGA1Z5Efu8CiU/8I26TSzjs=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++Redirected to http://localhost:3000/session
++Completed in 5ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:46:20) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:47:06) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:47:09) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"sWv/ye/YgRsIAoMFkgXvIGA1Z5Efu8CiU/8I26TSzjs=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:47:09) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 6ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:47:10) [DELETE]
++  Parameters: {"authenticity_token"=>"sWv/ye/YgRsIAoMFkgXvIGA1Z5Efu8CiU/8I26TSzjs="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:47:10) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:47:34) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:47:37) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"oPykzSKS+7wSfrorrmNPT1DwTDly2oE1eOCEoBQ9Irc=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:47:37) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:47:44) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"oPykzSKS+7wSfrorrmNPT1DwTDly2oE1eOCEoBQ9Irc=", "user"=>{"name"=>"sjkhf", "password"=>"ldsgkh"}}
++  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'sjkhf') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 7ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:47:44) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 6ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:47:46) [DELETE]
++  Parameters: {"authenticity_token"=>"oPykzSKS+7wSfrorrmNPT1DwTDly2oE1eOCEoBQ9Irc="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:47:46) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:48:58) [GET]
++
++NameError (undefined local variable or method `sessions_path' for #<SessionsController:0x1037ebe28>):
++  app/controllers/application_controller.rb:12:in `authenticate_required'
++
++Rendered rescues/_trace (35.7ms)
++Rendered rescues/_request_and_response (5.5ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:04) [GET]
++Redirected to http://localhost:3000/session
++Filter chain halted as [:authenticate_required] rendered_or_redirected.
++Completed in 1ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:30) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:49:33) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"TrXLlERdvBuvzK8epZMg8ZaNNa6xKYDhPdd1oLhtlyk=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:34) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:49:37) [DELETE]
++  Parameters: {"authenticity_token"=>"TrXLlERdvBuvzK8epZMg8ZaNNa6xKYDhPdd1oLhtlyk="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:49:37) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 6ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:50:12) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:50:14) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"QlCXbr6ceyX1R6kn5Q3SellslH+JJy++qG5cFlPUWFc=", "user"=>{"name"=>"jhdg", "password"=>""}}
++  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'jhdg') LIMIT 1[0m
++
++ActionView::MissingTemplate (Missing template sessions/create.erb in view path app/views):
++  
++
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:51:06) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"QlCXbr6ceyX1R6kn5Q3SellslH+JJy++qG5cFlPUWFc=", "user"=>{"name"=>"jhdg", "password"=>""}}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'jhdg') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++
++ActionController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
++  app/controllers/sessions_controller.rb:14:in `create'
++
++Rendered rescues/_trace (30.9ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:08) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:16) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:51:19) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"QlCXbr6ceyX1R6kn5Q3SellslH+JJy++qG5cFlPUWFc=", "user"=>{"name"=>"kisu", "password"=>""}}
++  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 9ms (DB: 1) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:19) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:51:25) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"QlCXbr6ceyX1R6kn5Q3SellslH+JJy++qG5cFlPUWFc=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:25) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 6ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:28) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:51:29) [DELETE]
++  Parameters: {"authenticity_token"=>"QlCXbr6ceyX1R6kn5Q3SellslH+JJy++qG5cFlPUWFc="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:29) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:43) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 4, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:51:47) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"BcJk4K0MrcBApRMMNVAFrEnZV86i2nbmgTtC15HEFHQ=", "user"=>{"name"=>"", "password"=>""}}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = '') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 7ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:47) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:51:53) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"BcJk4K0MrcBApRMMNVAFrEnZV86i2nbmgTtC15HEFHQ=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 9ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:51:53) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 5, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:53:18) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 7ms (View: 6, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:53:23) [DELETE]
++  Parameters: {"authenticity_token"=>"BcJk4K0MrcBApRMMNVAFrEnZV86i2nbmgTtC15HEFHQ="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:53:23) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:53:26) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"PU67fRCFdT9e+byvqg8QRs6OummSprjsQsoL/c6QiXs=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/users/14
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:53:26) [GET]
++  Parameters: {"id"=>"14"}
++
++ActionView::MissingTemplate (Missing template users/show.erb in view path app/views):
++  
++
++Rendering rescues/layout (internal_server_error)
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:55:06) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++
++NoMethodError (undefined method `find_user_by_id' for #<Class:0x1033988f8>):
++  app/controllers/users_controller.rb:30:in `show'
++
++Rendered rescues/_trace (105.4ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++  [4;36;1mUser Load (4.8ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:55:45) [GET]
++  Parameters: {"id"=>"14"}
++  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++
++NoMethodError (undefined method `find_user' for #<Class:0x1036bfae0>):
++  app/controllers/users_controller.rb:30:in `show'
++
++Rendered rescues/_trace (29.7ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:55:55) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++
++ActionView::MissingTemplate (Missing template users/show.erb in view path app/views):
++  
++
++Rendering rescues/layout (internal_server_error)
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:56:46) [GET]
++  Parameters: {"id"=>"14"}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++
++ActionView::MissingTemplate (Missing template users/show.erb in view path app/views):
++  
++
++Rendering rescues/layout (internal_server_error)
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:56:55) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 21ms (View: 9, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:57:01) [DELETE]
++  Parameters: {"authenticity_token"=>"PU67fRCFdT9e+byvqg8QRs6OummSprjsQsoL/c6QiXs="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:57:01) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:57:04) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"eolftg2gHy/zT4yiXvDGckipSZjVYUzwzwvB9+Via1o=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
++Redirected to http://localhost:3000/users/14
++Completed in 9ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:57:04) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 10ms (View: 3, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:57:13) [GET]
++  Parameters: {"id"=>"14"}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 14ms (View: 6, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:57:15) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 11ms (View: 3, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:57:20) [GET]
++  Parameters: {"id"=>"14"}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 14ms (View: 6, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:57:43) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++
++RuntimeError (#<User id: 14, name: "kisu", salt: "12695389142148237740", hashed_password: "fc483ca51c681bdbbda1bd8595e28dc5bd309951d91fb364d1d...", created_at: "2010-03-25 17:41:54", updated_at: "2010-03-25 17:41:54">):
++  app/controllers/users_controller.rb:30:in `show'
++
++Rendered rescues/_trace (29.5ms)
++Rendered rescues/_request_and_response (0.3ms)
++Rendering rescues/layout (internal_server_error)
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:58:16) [GET]
++  Parameters: {"id"=>"14"}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 15ms (View: 8, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:58:26) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 15ms (View: 8, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:58:36) [GET]
++  Parameters: {"id"=>"14"}
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 16ms (View: 8, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing UsersController#show (for 127.0.0.1 at 2010-03-25 19:58:50) [GET]
++  Parameters: {"id"=>"14"}
++  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 14) [0m
++Rendering template within layouts/application
++Rendering users/show
++Completed in 82ms (View: 7, DB: 0) | 200 OK [http://localhost/users/14]
++
++
++Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-25 19:58:52) [DELETE]
++  Parameters: {"authenticity_token"=>"eolftg2gHy/zT4yiXvDGckipSZjVYUzwzwvB9+Via1o="}
++Redirected to http://localhost:3000/session
++Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:58:52) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 4ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
++
++
++Processing SessionsController#create (for 127.0.0.1 at 2010-03-25 19:58:57) [POST]
++  Parameters: {"commit"=>"Login", "authenticity_token"=>"I+rcm5ABf3E1+XfA4NGB9RQs4J+BYcXQFxK6Gn6o3GY=", "user"=>{"name"=>"arghapofsd", "password"=>""}}
++  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'arghapofsd') LIMIT 1[0m
++Redirected to http://localhost:3000/session
++Completed in 8ms (DB: 0) | 302 Found [http://localhost/session]
++
++
++Processing SessionsController#show (for 127.0.0.1 at 2010-03-25 19:58:57) [GET]
++Rendering template within layouts/application
++Rendering sessions/show
++Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
+diff --git a/milloinviimeksi/public/stylesheets/style.css b/milloinviimeksi/public/stylesheets/style.css
+new file mode 100644
+index 0000000..c5a3190
+--- /dev/null
++++ b/milloinviimeksi/public/stylesheets/style.css
+@@ -0,0 +1,17 @@
++section{
++  display: block;
++}
++
++.warning{
++	background-color: pink;
++	border: thin solid red;
++	padding: 0.5em;
++	
++}
++
++.notice{
++	background-color: #CFC;;
++	border: thin solid green;
++	padding: 0.5em;
++	
++}
+\ No newline at end of file
+-- 
+1.7.0.3
+
