@@ -1,0 +1,31 @@
+<h1>Add new event instance</h1>
+
+<% form_for(@event_instance) do |instance| %>
+  <%= instance.error_messages %>
+  
+<% # valitse instanssi %>
+
+  <p>
+    <%= instance.label :time %><br />
+    <%= instance.datetime_select :time %>
+  </p>
+  <p>
+    <%= instance.submit 'Create' %>
+  </p>
+<% end %>
+
+<h1>Listing event instances</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Time</th>
+  </tr>
+
+<% @event_instances.each do |event_instance| %>
+  <tr>
+    <td><%=h event_instance.event.name %></td>
+    <td><%=h event_instance.time.strftime("%d.%m.%Y %H:%M") %></td>
+  </tr>
+<% end %>
+</table>

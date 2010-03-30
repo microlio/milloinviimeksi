@@ -1,19 +1,24 @@
-<h1>Listing events</h1>
+<h1>When did you...</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Time</th>
-  </tr>
+<ul>
 
 <% @events.each do |event| %>
-  <tr>
-    <td><%=h event.name %></td>
-    <td><%=h event.time.strftime("%d.%m.%Y %H:%M") %></td>
-  </tr>
+  <li>
+    <h2><%= link_to event.name, event %></h2>
+    <p>[Luo instanssi]</p>
+  </li>
 <% end %>
-</table>
+<li>
+    <% form_for(@event) do |f| %>
+      <p>
+        <%= f.text_field :name, {:placeholder => 'Create a new event?'}%>
+        <%= f.submit 'Create' %>
+      </p>
+    <% end %>
+    
+</li>
+</ul>
 
-<br />
 
-<%= link_to 'New event', new_event_path %>
+
+<!--<%= link_to 'New event', new_event_path %>-->
