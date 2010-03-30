@@ -1,0 +1,1368 @@
+# Logfile created on Mon Mar 29 20:17:47 +0300 2010REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-03-29 20:20:44) [GET]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:22:15) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:22:15) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 14ms (View: 12, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:23:24) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:23:24) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 11, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:24:13) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:24:13) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 11, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:24:26) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 6ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:24:26) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 11, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:24:39) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:24:39) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 11, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:25:08) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:25:08) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 11, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:26:11) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:26:11) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 14ms (View: 12, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:26:11) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:26:11) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:28:11) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:28:11) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 12, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:28:11) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:28:11) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:29:02) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:29:02) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 12, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:29:02) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:29:02) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:29:18) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:29:18) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 12, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:29:18) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:29:18) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:37:41) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:37:41) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 11, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:37:41) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/session
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:37:41) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:37:54) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 6ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:37:54) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 13ms (View: 11, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:37:54) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/session
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:37:54) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698845592148381100', '2010-03-29 17:42:39', '2010-03-29 17:42:39', '57853789b72959afd40b73be593b9afe5b90c87be302abb20fe2ee4eec53d53018e73084ca5638bb14faf89dca04d4c6a6a9b15a89d90ba8077c18320c5a9a83')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:42:39) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:42:39) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:42:39) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/session
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:42:39) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698845872148381100', '2010-03-29 17:43:07', '2010-03-29 17:43:07', '8dd4df8193fce78ecb61b7242c6d85b966087afd9189bcaa9336b158593bbf02195e061737b6305a794fed9d794164c5d47476ab694e86a8ae6c177b9f93cb7f')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:43:07) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:43:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"password"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:43:07) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"password"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 9ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:43:07) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698846772148381100', '2010-03-29 17:44:37', '2010-03-29 17:44:37', 'b4d8f8223b6d117be7a4d03fcad315f60565ddc421d7a71dd55079136c1fb14460c6db4bc801bcfbfebca58dae6602342c8e14840ab36af060074ad8a6e3d361')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:44:37) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:44:37) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:44:37) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:44:37) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698846972148381100', '2010-03-29 17:44:57', '2010-03-29 17:44:57', 'cd2fd62e0adce97f5dd3bb54967af76a3d1c9cb51d207e5a7c9f7306689cc7126251aafc3607eae65bb8572689869fdcde65acc7b65a63995dbe0bd2ea5b573c')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:44:57) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:44:57) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 7ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:44:57) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 9ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:44:57) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698849302148381100', '2010-03-29 17:48:50', '2010-03-29 17:48:50', '58efbe3f9d0d5db41491761502a3b61b2aa49d0a4edd71e2d1544a35e18ac2ed63309ba63ac6e71b9bf1022d2dd9b716e801ae5e5b7b029a3ff869681e29b834')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:48:50) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:48:50) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:48:50) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:48:50) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698849302148381100', '2010-03-29 17:48:50', '2010-03-29 17:48:50', '15102fae64d83545dcd554a936651b009476fad248eac57ce00adb6a1b63619e98f8608996fd5d66b002f37a9c205e974609c53de95e1d98dacb24ca31842f32')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:48:50) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:48:50) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:48:50) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698849622148381100', '2010-03-29 17:49:22', '2010-03-29 17:49:22', 'dbdfb0454268918707c878d020665f57d244e18688c0ab4a878483dfd793c03d8c2a3ed7cf2da2dda0651fd03d2b2c93963553ed907e99974b222dc74038c792')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:49:22) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:49:22) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:49:22) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:49:22) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698849622148381100', '2010-03-29 17:49:22', '2010-03-29 17:49:22', 'cb066d811a6900d944900079a5ef00ff6747432b23b9f5ee0144595887bd753ff2b06a8a845aecff532c329d437eb897424df2c454c3a9b865a6cc243bf16c3b')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:49:22) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:49:22) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:49:22) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698849872148381100', '2010-03-29 17:49:47', '2010-03-29 17:49:47', 'ca3ef0521215f68a3318b12d8d2402f9e18046f36e7b775d15f14fad9ee310061aad65033089b9f7f592f2fac6152941f890fd5d6bb7c8cfb5c6ae75acf7b12c')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:49:47) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 11ms (View: 9, DB: 1) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:49:47) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:49:47) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/1"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:49:47) [DELETE]
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:49:47) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698850002148381100', '2010-03-29 17:50:00', '2010-03-29 17:50:00', 'e6cace2eced66e59433c1cedb4911e16101146cf56952e892d9445f9dfe46869e5c5ee3d92313154c8aa003936d14670c479dc841f3381a4d5f0e5eaca19d351')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:50:00) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:50:00) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:50:00) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:50:00) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698850002148381100', '2010-03-29 17:50:00', '2010-03-29 17:50:00', '71644288314b114fced47432fa375e21b0f6fe56f43eab2e3431c376c832e50a4776a60b44b27779310f5dcd3e1ed9aedebc4b20d50f8845a3431ec2a0160e96')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:50:00) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:50:01) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:50:01) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/1"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:50:01) [DELETE]
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:50:01) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698850122148381100', '2010-03-29 17:50:12', '2010-03-29 17:50:12', '23afc8cd710581b98a0c9499b0f5cf2b9e8e02e56aa422912e407b9e3f93df7060fc22c5cab3a1b9b5111e52ea1b9b770ff859ff16307db3e0397cb1215c906c')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:50:12) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:50:12) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 7ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:50:12) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:50:12) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.5ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698850122148381100', '2010-03-29 17:50:12', '2010-03-29 17:50:12', 'e13cf79c3c4f624b151b26d4c8e55db502acb196c95b05b48f90c9fa0a6f6301b7b7d6630000014f3321abc8c5a756d84e276621d5be8f0eafd5be402889db80')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:50:12) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 3, DB: 1) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:50:12) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:50:12) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/1"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:50:12) [DELETE]
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:50:12) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698850672148381100', '2010-03-29 17:51:07', '2010-03-29 17:51:07', '8847f3c40143ec56da7ab029161c95df43bd79239e157edf56a4ef519e8abb0257683a6131daf04b36f4540a675eab8f420b10d42bd5a62804ed988504db88c1')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:51:07) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:51:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 7ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:51:07) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:51:07) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698850672148381100', '2010-03-29 17:51:07', '2010-03-29 17:51:07', 'd30293444e9b909ba92efb3359e2aa27c2a81b7e605b5dfa8122d2f07e614080a75ceb80389eebaddefde0fcd781f4a05e3f22fe790f29bb5b07ae44f8a84698')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:51:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:51:07) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/users/1
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing UsersController#show (for 127.0.0.1 at 2010-03-29 20:51:07) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering users/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/users/1]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/users/1"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:51:07) [DELETE]
+Redirected to http://www.example.com/session
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:51:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698851532148381100', '2010-03-29 17:52:33', '2010-03-29 17:52:33', 'a3322122f3046033873fda0c1f8fa935fc26dbb7e7ef804ef171685bdedda7db66ca18fa7d883df6cf00a57a65c0c261b7f7283f7f11075d25fbde0d1a0d84d5')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:52:33) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:52:33) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:52:33) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:52:33) [GET]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-03-29 20:52:33) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698851532148381100', '2010-03-29 17:52:33', '2010-03-29 17:52:33', 'd4f6cf525288c782995c9974dd870fc4721c58944d90e0a393f0a0d32765467875377bf478b10e8334a7152441d4350e229c0a8f013447b2d95f95e5efda7a68')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:52:33) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:52:33) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:52:33) [GET]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-03-29 20:52:33) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698851692148381100', '2010-03-29 17:52:49', '2010-03-29 17:52:49', 'dfe8c66e2b6e13ea563786b42b224a7b2edd1f6f46b80631e26306948bd7600bfffda12bdd761e0a3f00312a79dab59cdfe0d511ddaa7f44dd003c5c1571909a')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:52:49) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 5ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:52:49) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:52:49) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:52:49) [GET]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-03-29 20:52:49) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698851692148381100', '2010-03-29 17:52:49', '2010-03-29 17:52:49', 'd36143bb79479077c68975978b59420bb082414a9da2addb8c4a91d2faebdd5635b99ba93d9658ce0abb068192c047e349ee462bddd29b9c718db6adff8e446a')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:52:49) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:52:49) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:52:49) [GET]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-03-29 20:52:49) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698851872148381100', '2010-03-29 17:53:07', '2010-03-29 17:53:07', '8e32afcb7983f19f4d126be366a977a0aabaf8034ff5ba66aea9c95a26b878b6c3824587107527b862a13f4800720006f8045989ad31e9ad25bcce96f9a27624')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:53:07) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:53:07) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/session
+Completed in 8ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698851872148381100', '2010-03-29 17:53:07', '2010-03-29 17:53:07', '2b5a43da56af6fc105c11890aab8841a16d8c8e39e09674f83fd7c5ea53664f431f362d69f4cdffb2bcf752d2136b19124fa22d49491ad7d7edf0466bd965899')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:53:07) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/session
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:53:07) [DELETE]
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:53:07) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:07) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698852142148381100', '2010-03-29 17:53:34', '2010-03-29 17:53:34', 'a4244abc040321b955870cd45573937c54db9ba804ea4af8f8dbe6fd66d1aee4be996846b9be94c89395dfbf5ccc391655e2d00b0239e575e28b9352624be620')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:53:34) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:34) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:53:34) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/session
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:34) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698852142148381100', '2010-03-29 17:53:34', '2010-03-29 17:53:34', 'cbc247a6b48aecf342e890d1d70a191425e398e35d2e6a6fb2bc436f37dda111b8a48ba94fd038dbcf4e90d088490b68b6836b0520be86fc11c8547fff91bb04')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:34) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:53:34) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/session
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:34) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:53:34) [DELETE]
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:53:34) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:53:34) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698852622148381100', '2010-03-29 17:54:22', '2010-03-29 17:54:22', 'e47e8dd8f1681bf980596ff5c54517e709e20aebfde5ac9ba496da3bb8b2e67474071d79ba6a5bccb1467179fb75a3e4e30c8ef56007d317415aff18ec541810')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:54:22) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:54:22) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:54:22) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:54:22) [GET]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-03-29 20:54:22) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698852622148381100', '2010-03-29 17:54:22', '2010-03-29 17:54:22', '021ffd9b8b0ac76ba29d5e8bd0e1cf3ebb938f6cc7b8d0dbda5e816fda85d0d4ef7f35c1bcafbd8c29174363aed64e4fd7c67e374067b37e88035c92766e4074')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:54:22) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:54:22) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#index (for 127.0.0.1 at 2010-03-29 20:54:22) [GET]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-03-29 20:54:22) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698853172148381100', '2010-03-29 17:55:17', '2010-03-29 17:55:17', 'af732b6413ba04895bc05ccfe85e2ca5e565ee9e3b19a9e0d29fb422cb5f3dac6b91aeccb62e65dc090e69f8f44f434626e9f1e8d3ce4be7fdf132b85d2671ba')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:17) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 11ms (View: 9, DB: 1) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:55:17) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 6ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:17) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://www.example.com/]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698853172148381100', '2010-03-29 17:55:17', '2010-03-29 17:55:17', 'ebebc92f80cf261b48e00bee32c09130b37574bbdc9afc85632cacc350ad7c1d7365e93a3e60a7b73f3d0d4d694b517faa0cf8dfccf7caba38b6b4c0376ec86e')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:17) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:55:17) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:17) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 3, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:55:18) [DELETE]
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:18) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698853482148381100', '2010-03-29 17:55:48', '2010-03-29 17:55:48', 'c7fa484fceedd73ccdc4df1dda7db328b3bf55e5d08e10323c1d42e1c46acedacc71e9874f59c2fe182c23b50ca5ccba44514cf29ee5be1e416f32ea88edb347')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:55:48) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:48) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:55:48) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:55:48) [GET]
+  [4;35;1mEvent Load (0.2ms)[0m   [0mSELECT * FROM "events" [0m
+Rendering template within layouts/application
+Rendering events/index
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698853482148381100', '2010-03-29 17:55:48', '2010-03-29 17:55:48', 'be028d61856264af47f1ceb7ab2ae60a64a2d78529e18c7e3fe09f62f1e139abb50a6e683a401bcab6dd4330f5bb7eab9afc3154a260bf6e0faa2f377d28a11f')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:48) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:55:48) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:55:48) [GET]
+  [4;35;1mEvent Load (0.1ms)[0m   [0mSELECT * FROM "events" [0m
+Rendering template within layouts/application
+Rendering events/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:55:48) [DELETE]
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:55:49) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:55:49) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698854262148381100', '2010-03-29 17:57:06', '2010-03-29 17:57:06', '3075e95b78220a81c46d1e6113a152c80b91a13fd85bcd34b38b798c187107107245ccbc4425e67e9386e85dd93dd1ff23082b6b57dfbae07d3dff683f9a7344')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:57:06) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:57:06) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 7ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:57:06) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:57:06) [GET]
+  [4;35;1mEvent Load (0.2ms)[0m   [0mSELECT * FROM "events" [0m
+Rendering template within layouts/application
+Rendering events/index
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12698854262148381100', '2010-03-29 17:57:06', '2010-03-29 17:57:06', '2a7d542552081986088ab60aa8054e20e94d756b78a202a9ce2454f736024131e1aad978e4af10037692f62c4d327c0c9c7b104ddadd5605c59d4a5a28ed96bb')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:57:06) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-29 20:57:06) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 2ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:57:06) [GET]
+  [4;35;1mEvent Load (0.1ms)[0m   [0mSELECT * FROM "events" [0m
+Rendering template within layouts/application
+Rendering events/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-29 20:57:06) [DELETE]
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-29 20:57:06) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-29 20:57:06) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12699331562148381100', '2010-03-30 07:12:36', '2010-03-30 07:12:36', '1c3b0aeb48b4a8d1aefb2d73c3ae45f8d895990a5dad1f2adc50257fc3ed5e2eaae86a6f157f44d41ef5dc6a62074488d4cfc5e711b2c9c122a3950c2e18d686')[0m
+REQUESTING PAGE: GET / with {} and HTTP headers {}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-30 10:12:36) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 21ms (DB: 1) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-30 10:12:36) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 7ms (View: 5, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-30 10:12:36) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"Shub-Niggurath"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 7ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-30 10:12:36) [GET]
+  [4;35;1mEvent Load (0.2ms)[0m   [0mSELECT * FROM "events" [0m
+Rendering template within layouts/application
+Rendering events/index
+Completed in 5ms (View: 2, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('kisu', '12699331562148381100', '2010-03-30 07:12:36', '2010-03-30 07:12:36', '30b9d2d960b7c963995dda06e6b0ac9ea8a84195f933f9c0b1fd823e93d3b578442b9d9c689e5d5dd44974472bd7336e37d4e92083a079adcce412aa6fb54426')[0m
+REQUESTING PAGE: GET /session with {} and HTTP headers {}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-30 10:12:36) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]
+REQUESTING PAGE: POST /session with {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-03-30 10:12:36) [POST]
+  Parameters: {"commit"=>"Login", "user"=>{"name"=>"kisu", "password"=>"generic"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-30 10:12:36) [GET]
+  [4;35;1mEvent Load (0.1ms)[0m   [0mSELECT * FROM "events" [0m
+Rendering template within layouts/application
+Rendering events/index
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: DELETE /session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-03-30 10:12:36) [DELETE]
+Redirected to http://www.example.com/
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/session]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/session"}
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-03-30 10:12:36) [GET]
+Redirected to http://www.example.com/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://www.example.com/]
+REQUESTING PAGE: GET http://www.example.com/session with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/"}
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-03-30 10:12:36) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 2ms (View: 2, DB: 0) | 200 OK [http://www.example.com/session]

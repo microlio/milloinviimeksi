@@ -1,0 +1,428 @@
+--- 
+:stats: 
+  :testLOC: 24
+  :lines: 
+  - :loc_per_method: 3
+    :methods: 15
+    :lines: 111
+    :classes: 4
+    :loc: 80
+    :name: Controllers
+    :methods_per_class: 3
+  - :loc_per_method: 0
+    :methods: 0
+    :lines: 7
+    :classes: 0
+    :loc: 6
+    :name: Helpers
+    :methods_per_class: 0
+  - :loc_per_method: 5
+    :methods: 5
+    :lines: 50
+    :classes: 2
+    :loc: 36
+    :name: Models
+    :methods_per_class: 2
+  - :loc_per_method: 0
+    :methods: 0
+    :lines: 16
+    :classes: 2
+    :loc: 12
+    :name: Functional tests
+    :methods_per_class: 0
+  - :loc_per_method: 0
+    :methods: 0
+    :lines: 16
+    :classes: 3
+    :loc: 12
+    :name: Unit tests
+    :methods_per_class: 0
+  - :loc_per_method: 5
+    :methods: 20
+    :lines: 200
+    :classes: 11
+    :loc: 146
+    :name: Total
+    :methods_per_class: 1
+  :code_to_test_ratio: 0.2
+  :codeLOC: 122
+:flog: 
+  :total: 122.6
+  :average: 6.1
+  :pages: 
+  - :path: /app/controllers/sessions_controller.rb
+    :average_score: 7.3
+    :scanned_methods: 
+    - :score: 21.3
+      :operators: 
+      - :score: 6.4
+        :operator: "[]"
+      - :score: 3.9
+        :operator: assignment
+      - :score: 3.8
+        :operator: params
+      - :score: 2.6
+        :operator: redirect_to
+      - :score: 2.6
+        :operator: flash
+      - :score: 1.6
+        :operator: session_path
+      - :score: 1.4
+        :operator: root_path
+      - :score: 1.3
+        :operator: authenticate
+      - :score: 1.2
+        :operator: log_user_in
+      - :score: 1.2
+        :operator: branch
+      :name: SessionsController#create
+    - :score: 3.8
+      :operators: 
+      - :score: 1.4
+        :operator: session_path
+      - :score: 1.2
+        :operator: redirect_to
+      - :score: 1.2
+        :operator: reset_session
+      :name: SessionsController#destroy
+    - :score: 3.1
+      :operators: 
+      - :score: 1.3
+        :operator: session
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: id
+      - :score: 1.2
+        :operator: branch
+      :name: SessionsController#log_user_in
+    - :score: 1.1
+      :operators: 
+      - :score: 1.1
+        :operator: skip_before_filter
+      :name: SessionsController#none
+    :score: 29.3
+    :highest_score: 21.3
+  - :path: /app/controllers/users_controller.rb
+    :average_score: 11.6
+    :scanned_methods: 
+    - :score: 18.8
+      :operators: 
+      - :score: 6.2
+        :operator: assignment
+      - :score: 5.2
+        :operator: "[]"
+      - :score: 3.2
+        :operator: params
+      - :score: 1.6
+        :operator: sessions_path
+      - :score: 1.4
+        :operator: flash
+      - :score: 1.4
+        :operator: redirect_to
+      - :score: 1.3
+        :operator: render
+      - :score: 1.2
+        :operator: now
+      - :score: 1.2
+        :operator: branch
+      - :score: 1.2
+        :operator: save
+      - :score: 1.2
+        :operator: new
+      :name: UsersController#create
+    - :score: 4.4
+      :operators: 
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.2
+        :operator: find
+      - :score: 1.2
+        :operator: assignment
+      :name: UsersController#show
+    :score: 23.2
+    :highest_score: 18.8
+  - :path: /app/models/user.rb
+    :average_score: 6.1
+    :scanned_methods: 
+    - :score: 10.2
+      :operators: 
+      - :score: 3.0
+        :operator: password
+      - :score: 2.8
+        :operator: salt
+      - :score: 2.6
+        :operator: branch
+      - :score: 1.4
+        :operator: create_salt
+      - :score: 1.3
+        :operator: hash_plaintext_password
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: blank?
+      :name: User#hash_password
+    - :score: 7.2
+      :operators: 
+      - :score: 1.2
+        :operator: before_save
+      - :score: 1.2
+        :operator: validates_presence_of
+      - :score: 1.2
+        :operator: validates_uniqueness_of
+      - :score: 1.2
+        :operator: private
+      - :score: 1.2
+        :operator: before_create
+      - :score: 1.2
+        :operator: attr_accessor
+      :name: User#none
+    - :score: 6.4
+      :operators: 
+      - :score: 2.6
+        :operator: branch
+      - :score: 1.6
+        :operator: new
+      - :score: 1.4
+        :operator: raise
+      - :score: 1.4
+        :operator: correct_password?
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: find_by_name
+      :name: User#authenticate
+    - :score: 6.0
+      :operators: 
+      - :score: 1.7
+        :operator: salt
+      - :score: 1.5
+        :operator: hash_plaintext_password
+      - :score: 1.5
+        :operator: hashed_password
+      - :score: 1.3
+        :operator: ==
+      :name: User#correct_password?
+    - :score: 5.7
+      :operators: 
+      - :score: 1.5
+        :operator: now
+      - :score: 1.5
+        :operator: current
+      - :score: 1.3
+        :operator: object_id
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: strftime
+      :name: User#create_salt
+    - :score: 5.7
+      :operators: 
+      - :score: 2.6
+        :operator: "<<"
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: new
+      - :score: 1.3
+        :operator: to_s
+      - :score: 0.4
+        :operator: lit_fixnum
+      :name: User#hash_plaintext_password
+    - :score: 1.1
+      :operators: 
+      - :score: 1.1
+        :operator: require
+      :name: main#none
+    :score: 42.4
+    :highest_score: 10.2
+  - :path: /app/controllers/events_controller.rb
+    :average_score: 4.4
+    :scanned_methods: 
+    - :score: 9.9
+      :operators: 
+      - :score: 2.6
+        :operator: assignment
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: redirect_to
+      - :score: 1.4
+        :operator: flash
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.3
+        :operator: render
+      - :score: 1.2
+        :operator: save
+      - :score: 1.2
+        :operator: new
+      - :score: 1.2
+        :operator: branch
+      :name: EventsController#create
+    - :score: 4.4
+      :operators: 
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.2
+        :operator: find
+      - :score: 1.2
+        :operator: assignment
+      :name: EventsController#show
+    - :score: 1.7
+      :operators: 
+      - :score: 1.2
+        :operator: assignment
+      - :score: 1.2
+        :operator: all
+      :name: EventsController#index
+    - :score: 1.7
+      :operators: 
+      - :score: 1.2
+        :operator: assignment
+      - :score: 1.2
+        :operator: new
+      :name: EventsController#new
+    :score: 17.7
+    :highest_score: 9.9
+  - :path: /app/controllers/application_controller.rb
+    :average_score: 4.5
+    :scanned_methods: 
+    - :score: 5.7
+      :operators: 
+      - :score: 1.6
+        :operator: session_path
+      - :score: 1.4
+        :operator: redirect_to
+      - :score: 1.4
+        :operator: session
+      - :score: 1.2
+        :operator: "[]"
+      - :score: 1.2
+        :operator: branch
+      :name: ApplicationController#authenticate_required
+    - :score: 3.3
+      :operators: 
+      - :score: 1.1
+        :operator: helper
+      - :score: 1.1
+        :operator: protect_from_forgery
+      - :score: 1.1
+        :operator: before_filter
+      :name: ApplicationController#none
+    :score: 9.0
+    :highest_score: 5.7
+  - :path: /app/models/event.rb
+    :average_score: 1.0
+    :scanned_methods: 
+    - :score: 1.0
+      :operators: 
+      - :score: 1.0
+        :operator: validates_presence_of
+      :name: Event#none
+    :score: 1.0
+    :highest_score: 1.0
+:flay: 
+  :total_score: "0"
+  :matches: []
+
+:reek: 
+  :matches: 
+  - :file_path: app/controllers/application_controller.rb
+    :code_smells: []
+
+  - :file_path: app/controllers/events_controller.rb
+    :code_smells: 
+    - :type: Irresponsible Module
+      :message: has no descriptive comment
+      :method: EventsController
+  - :file_path: app/controllers/sessions_controller.rb
+    :code_smells: 
+    - :type: Irresponsible Module
+      :message: has no descriptive comment
+      :method: SessionsController
+    - :type: Duplication
+      :message: calls flash twice
+      :method: SessionsController#create
+    - :type: Duplication
+      :message: calls params twice
+      :method: SessionsController#create
+    - :type: Duplication
+      :message: calls params[:user] twice
+      :method: SessionsController#create
+    - :type: Long Method
+      :message: has approx 7 statements
+      :method: SessionsController#create
+    - :type: Control Couple
+      :message: is controlled by argument user
+      :method: SessionsController#log_user_in
+  - :file_path: app/controllers/users_controller.rb
+    :code_smells: 
+    - :type: Irresponsible Module
+      :message: has no descriptive comment
+      :method: UsersController
+    - :type: Duplication
+      :message: calls params twice
+      :method: UsersController#create
+    - :type: Duplication
+      :message: calls params[:user] twice
+      :method: UsersController#create
+    - :type: Long Method
+      :message: has approx 7 statements
+      :method: UsersController#create
+  - :file_path: app/helpers/application_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/session_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/user_helper.rb
+    :code_smells: []
+
+  - :file_path: app/models/event.rb
+    :code_smells: 
+    - :type: Irresponsible Module
+      :message: has no descriptive comment
+      :method: Event
+  - :file_path: app/models/user.rb
+    :code_smells: 
+    - :type: Irresponsible Module
+      :message: has no descriptive comment
+      :method: User
+    - :type: Duplication
+      :message: calls self.password twice
+      :method: User#hash_password
+:churn: 
+  :method_churn: []
+
+  :changed_classes: []
+
+  :changes: 
+  - :file_path: milloinviimeksi/config/routes.rb
+    :times_changed: 3
+  - :file_path: milloinviimeksi/log/development.log
+    :times_changed: 3
+  - :file_path: milloinviimeksi/db/development.sqlite3
+    :times_changed: 3
+  :changed_methods: []
+
+  :class_churn: []
+
+  :changed_files: 
+  - milloinviimeksi/Rakefile
+:roodi: 
+  :total: 
+  - Found 0 errors.
+  :problems: []
+
+:saikuro: 
+  :methods: []
+
+  :classes: []
+
+  :files: []
+

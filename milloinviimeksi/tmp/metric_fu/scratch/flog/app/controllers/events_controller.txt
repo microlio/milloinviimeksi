@@ -1,0 +1,24 @@
+    17.7: flog total
+     4.4: flog/method average
+
+     9.9: EventsController#create
+     2.6: assignment
+     1.6: params
+     1.4: redirect_to
+     1.4: flash
+     1.4: []
+     1.3: render
+     1.2: save
+     1.2: new
+     1.2: branch
+     4.4: EventsController#show
+     1.6: params
+     1.4: []
+     1.2: find
+     1.2: assignment
+     1.7: EventsController#index
+     1.2: assignment
+     1.2: all
+     1.7: EventsController#new
+     1.2: assignment
+     1.2: new

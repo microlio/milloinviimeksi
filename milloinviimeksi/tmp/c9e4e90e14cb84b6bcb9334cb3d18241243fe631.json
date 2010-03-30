@@ -1,0 +1,1 @@
+{"churn":{"changed_files":["milloinviimeksi/Rakefile"],"changed_classes":[],"changes":[{"file_path":"milloinviimeksi/config/routes.rb","times_changed":3},{"file_path":"milloinviimeksi/log/development.log","times_changed":3},{"file_path":"milloinviimeksi/db/development.sqlite3","times_changed":3}],"changed_methods":[],"class_churn":[],"method_churn":[]}}

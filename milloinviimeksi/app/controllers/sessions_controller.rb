@@ -6,13 +6,13 @@ class SessionsController < ApplicationController
       user = User.authenticate(params[:user][:name], params[:user][:password])
     rescue
       flash[:warning] = 'You shall not pass!'
-      redirect_to session_path
+      redirect_to root_path
       return
     end
 
     flash[:notice] = 'Multipass!'
     log_user_in user
-    redirect_to user
+    redirect_to root_path
 
   end
 
@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to session_path
+    flash[:notice] = 'You have logged out'
+    redirect_to root_path
   end
 
   def show
