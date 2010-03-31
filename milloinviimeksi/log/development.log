@@ -2289,3 +2289,34 @@ Migrating to CreateEvents (20100328152048)
 [0m
   [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("events")[0m
   [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100325122256)
+Migrating to CreateEvents (20100328152048)
+Migrating to RemoveTimeFromEvents (20100329123847)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (10.3ms)[0m   [0mCREATE TEMPORARY TABLE "altered_events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "time" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("events")[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mDROP TABLE "events"[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("altered_events")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "altered_events"[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100329123847')[0m
+Migrating to CreateEventInstances (20100329124741)
+  [4;36;1mSQL (10.4ms)[0m   [0;1mCREATE TABLE "event_instances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer, "time" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20100329124741')[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("event_instances")[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("events")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("users")[0m
