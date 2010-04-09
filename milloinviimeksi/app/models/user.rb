@@ -2,10 +2,12 @@ require 'digest/sha2'
 
 class User < ActiveRecord::Base
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password
 
   validates_presence_of :name
   validates_uniqueness_of :name
+
+  validates_presence_of :password
 
   before_create :create_salt
   before_save :hash_password
