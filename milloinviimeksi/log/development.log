@@ -2320,3 +2320,44 @@ Migrating to CreateEventInstances (20100329124741)
   [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("event_instances")[0m
   [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("events")[0m
   [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("users")[0m
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-04-09 11:27:37) [GET]
+Redirected to http://localhost:3000/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-04-09 11:27:37) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 71ms (View: 69, DB: 0) | 200 OK [http://localhost/session]
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-04-09 11:27:40) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"dDwGeSHoauQrNgjCEgQaUdIvUzZoi3xXzxotAgYruxk=", "user"=>{"name"=>"kisu", "password"=>"kisu"}}
+  [4;36;1mUser Load (26.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'kisu') LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 101ms (DB: 26) | 302 Found [http://localhost/session]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-04-09 11:27:40) [GET]
+  [4;35;1mEvent Load (2.2ms)[0m   [0mSELECT * FROM "events" [0m
+Rendering template within layouts/application
+Rendering events/index
+Completed in 43ms (View: 11, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing EventsController#create (for 127.0.0.1 at 2010-04-09 11:27:44) [POST]
+  Parameters: {"commit"=>"Create", "authenticity_token"=>"dDwGeSHoauQrNgjCEgQaUdIvUzZoi3xXzxotAgYruxk=", "event"=>{"name"=>"ugh"}}
+  [4;36;1mEvent Create (0.4ms)[0m   [0;1mINSERT INTO "events" ("name", "created_at", "updated_at") VALUES('ugh', '2010-04-09 08:27:45', '2010-04-09 08:27:45')[0m
+Redirected to http://localhost:3000/events/1
+Completed in 10ms (DB: 0) | 302 Found [http://localhost/events]
+
+
+Processing EventsController#show (for 127.0.0.1 at 2010-04-09 11:27:45) [GET]
+  Parameters: {"id"=>"1"}
+  [4;35;1mEvent Load (0.2ms)[0m   [0mSELECT * FROM "events" WHERE ("events"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering events/show
+Completed in 29ms (View: 23, DB: 0) | 200 OK [http://localhost/events/1]
