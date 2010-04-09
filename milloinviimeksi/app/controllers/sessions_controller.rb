@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+
+  protect_from_forgery :except => [:create, :destroy]
   skip_before_filter :authenticate_required, :only => [:show, :create]
 
   def create
@@ -6,13 +8,13 @@ class SessionsController < ApplicationController
       user = User.authenticate(params[:user][:name], params[:user][:password])
     rescue
       flash[:warning] = 'You shall not pass!'
-      redirect_to root_path
+      redirect_to :root
       return
     end
 
     flash[:notice] = 'Multipass!'
     log_user_in user
-    redirect_to root_path
+    redirect_to :root
 
   end
 
@@ -27,6 +29,7 @@ class SessionsController < ApplicationController
   end
 
   def show
+    redirect_to :root if logged_in?
   end
 
 end

@@ -8,10 +8,14 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_required
 
   def authenticate_required
-    unless session[:user_id]
+    unless logged_in?
       redirect_to session_path
       return false
     end
+  end
+
+  def logged_in?
+    session[:user_id]
   end
 
   # Scrub sensitive parameters from your log
