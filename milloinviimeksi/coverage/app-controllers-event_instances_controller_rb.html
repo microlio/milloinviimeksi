@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-event_instances_controller_rb.html">app/controllers/event_instances_controller.rb</a></td>
-            <td class='right_align'><tt>23</tt></td>
-            <td class='right_align'><tt>18</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>30.43%</tt></div>
+            <td class='right_align'><tt>29</tt></td>
+            <td class='right_align'><tt>13</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:30px"></div>
-            <div class="uncovered" style="width:70px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>22.22%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:22px"></div>
-            <div class="uncovered" style="width:78px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -68,134 +68,170 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line3">3</a>   def index</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line4">4</a>     @event_instances = EventInstance.all</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line5">5</a>     @event_instance = EventInstance.new</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line6">6</a>   end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line3">3</a>   # def index</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line7">7</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line8">8</a>   def show</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line9">9</a>     @event_instance = EventInstance.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line10">10</a>   end</pre></td>
+            <td><pre><a name="line4">4</a>   #   @event_instances = EventInstance.all</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line11">11</a> </pre></td>
+            <td><pre><a name="line5">5</a>   # end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line6">6</a>   # </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line7">7</a>   # def new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line8">8</a>   #   @event = Event.find_by_id params[:event_id]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line9">9</a>   #   @event_instance = EventInstance.new</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line10">10</a>   # end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line11">11</a>   # </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line12">12</a>   # def show</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line13">13</a>   #   @event_instance = EventInstance.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line14">14</a>   # end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line12">12</a>   def create</pre></td>
+            <td><pre><a name="line16">16</a>   def create</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line13">13</a>     @event_instance = EventInstance.new(params[:event_instance])</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line17">17</a>     @event_instance = EventInstance.new(params[:event_instance])</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line14">14</a> </pre></td>
+          <tr class="marked">
+            <td><pre><a name="line18">18</a>     @event = Event.find_by_id params[:event_id]</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line15">15</a>     if @event_instance.save</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a> </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line16">16</a>       flash[:notice] = 'Event instance was successfully created.'</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line20">20</a>     @event_instance.event = @event</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line17">17</a>       redirect_to(@event_instance)</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line21">21</a> </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line18">18</a>     else</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line22">22</a>     if @event_instance.save</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line19">19</a>       render :action =&gt; &quot;new&quot; </pre></td>
+          <tr class="marked">
+            <td><pre><a name="line23">23</a>       flash[:notice] = 'Event instance was successfully created.'</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line20">20</a>     end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line24">24</a>       redirect_to @event</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line21">21</a>   end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a>     else</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line22">22</a>   </pre></td>
+          <tr class="marked">
+            <td><pre><a name="line26">26</a>       render :action =&gt; &quot;new&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line23">23</a> end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line27">27</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Fri Apr 09 11:29:34 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Mon Apr 12 19:08:11 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

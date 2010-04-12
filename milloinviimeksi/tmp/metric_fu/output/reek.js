@@ -6,10 +6,14 @@
       g.marker_font_size = "10px"
 
         g.title = 'Reek: code smells';
-        g.data('Control Couple', [1,1])
-g.data('Duplication', [6,6])
-g.data('Irresponsible Module', [3,5])
-g.data('Long Method', [2,2])
+        g.data('Control Couple', [1,1,,,1])
+g.data('ControlCouple', [,,1,1])
+g.data('Duplication', [6,6,8,8,6])
+g.data('Irresponsible Module', [3,5,,,7])
+g.data('IrresponsibleModule', [,,7,7])
+g.data('Long Method', [2,2,,,2])
+g.data('LongMethod', [,,2,2])
+g.data('Uncommunicative Name', [,,,,2])
 
-        g.labels = {"0":"3/27","1":"3/29"};
+        g.labels = {"0":"3/27","1":"3/29","2":"4/7","3":"4/8","4":"4/12"};
         g.draw();

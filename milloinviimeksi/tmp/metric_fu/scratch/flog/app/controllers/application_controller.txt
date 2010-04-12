@@ -1,13 +1,15 @@
-     9.0: flog total
-     4.5: flog/method average
+    10.3: flog total
+     3.4: flog/method average
 
-     5.7: ApplicationController#authenticate_required
+     4.4: ApplicationController#authenticate_required
      1.6: session_path
      1.4: redirect_to
-     1.4: session
-     1.2: []
+     1.2: logged_in?
      1.2: branch
      3.3: ApplicationController#none
      1.1: helper
      1.1: protect_from_forgery
      1.1: before_filter
+     2.6: ApplicationController#logged_in?
+     1.4: session
+     1.2: []
