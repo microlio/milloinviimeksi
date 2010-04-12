@@ -1,0 +1,5 @@
+<% form_for([@event, @event_instance]) do |f| %>
+<%= f.error_messages %>
+  <%= f.datetime_select :time %>
+  <%= f.submit 'Add occasion' %>
+<% end %>

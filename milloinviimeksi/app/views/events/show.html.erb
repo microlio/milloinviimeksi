@@ -1,11 +1,19 @@
-<p>
-  <b>Name:</b>
-  <%=h @event.name %>
-</p>
 
-<p>
-  <b>Time:</b>
+<h2>Name:</h2>
+<p><%=h @event.name %></p>
 
-</p>
+<h2>Times:</h2>
 
+<ul>
+<% @event.event_instances.each do |instance|%>
+    <li><%= instance.time %></li>
+<% end %>
+<li>
+  <% form_for([@event, @event_instance]) do |f| %>
+  <%= f.error_messages %>
+    <%= f.datetime_select :time %>
+    <%= f.submit 'Add occasion' %>
+  <% end %>
+</li>
+</ul>
 <%= link_to 'Back', events_path %>

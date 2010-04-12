@@ -5,7 +5,12 @@
 <% @events.each do |event| %>
   <li>
     <h2><%= link_to event.name, event %></h2>
-    <p>[Luo instanssi]</p>
+    <p><% if event.event_instances.last %>
+    <b><%= event.event_instances.last.time.strftime('%c') %></b> and <%= (event.event_instances.size - 1) %> other times
+    <% else %>
+    never
+    <% end %>
+    </p>
   </li>
 <% end %>
 <li>

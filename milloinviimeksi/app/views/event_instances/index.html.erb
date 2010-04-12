@@ -1,18 +1,5 @@
 <h1>Add new event instance</h1>
-
-<% form_for(@event_instance) do |instance| %>
-  <%= instance.error_messages %>
-  
-<% # valitse instanssi %>
-
-  <p>
-    <%= instance.label :time %><br />
-    <%= instance.datetime_select :time %>
-  </p>
-  <p>
-    <%= instance.submit 'Create' %>
-  </p>
-<% end %>
+<p><%= link_to "Add new event instance", new_event_event_instance_path %></p>
 
 <h1>Listing event instances</h1>
 
