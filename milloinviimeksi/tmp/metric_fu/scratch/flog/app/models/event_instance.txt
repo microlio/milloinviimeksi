@@ -1,0 +1,5 @@
+     1.0: flog total
+     1.0: flog/method average
+
+     1.0: EventInstance#none
+     1.0: belongs_to

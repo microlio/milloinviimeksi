@@ -1,0 +1,133 @@
+From e8d60fd334483dc66425ec1fa4ba0eaeb2a32707 Mon Sep 17 00:00:00 2001
+From: Juho Kilpikoski <juho.kilpikoski@iki.fi>
+Date: Fri, 9 Apr 2010 11:34:24 +0300
+Subject: [PATCH 2/4] Add a new user-spec and required changes to model
+
+---
+ milloinviimeksi/app/models/user.rb      |    4 ++-
+ milloinviimeksi/db/test.sqlite3         |  Bin 12288 -> 14336 bytes
+ milloinviimeksi/log/development.log     |   36 +++++++++++++++++++++++++++++++
+ milloinviimeksi/log/test.log            |    6 +++++
+ milloinviimeksi/spec/model/user_spec.rb |   12 +++++-----
+ 5 files changed, 51 insertions(+), 7 deletions(-)
+
+diff --git a/milloinviimeksi/app/models/user.rb b/milloinviimeksi/app/models/user.rb
+index 573129e..5bb223b 100644
+--- a/milloinviimeksi/app/models/user.rb
++++ b/milloinviimeksi/app/models/user.rb
+@@ -2,11 +2,13 @@ require 'digest/sha2'
+ 
+ class User < ActiveRecord::Base
+ 
+-  attr_accessor :password, :password_confirmation
++  attr_accessor :password
+ 
+   validates_presence_of :name
+   validates_uniqueness_of :name
+ 
++  validates_presence_of :password
++
+   before_create :create_salt
+   before_save :hash_password
+ 
+diff --git a/milloinviimeksi/db/test.sqlite3 b/milloinviimeksi/db/test.sqlite3
+index 9863e452419484f9e24abc2888c7b64f21a3ab07..a0434453a84388201b88658cea3a33046bf68966 100644
+GIT binary patch
+delta 378
+zcmZojXegK<Ey&4$3RoxV*a)z(Br&k-v)yGgXN_lh!;-YI@f9<3BRkt<RaR3*_Q}z#
+zL5!@E*Rkp`vQ56r>LS6yE-o(4*vwgyn3R)RTAW%`3?^77Te9twX;fxr7nhV|Y*GYE
+zr<SGWl@vormdUB?ag$H8)qDCevWshLGd2Yy)Wm1z6_+IDC8t6ZBe+b?L9UJ=t_mTJ
+zPCl**N?@blvXi~p%mkrADM|{Nc_pdosYRO)u)9bsX5rxAVPW6F!2XW?4*Mzg9h(I?
+zR<NrGurO&F85kNE7#mp{8W~%dm<uq&MJx<WjSNgICf`w)6$i?in41`K0mF-heG3Eo
+oE%xK=TiD+MO<BS|`IbJnG*ml_5VIyD)I_L$W}v(r2h;#Y0C>A*mH+?%
+
+delta 201
+zcmZoDXh@hKEy%`z3RouU*zmEkDlxEovVCWhXI;apv{{g24GVK4JL}|B7SqWxtQ?aU
+zv3N7GOn%3r$H+QameoaqnO$65oUxg+Brz!`wX`_3s2EJJOs-_zH~B7Gu(SyyySStz
+zW0NyjMQT}UUP&>8WSShz7Pt8@yQ2gL6Z;(o_IK=efc9NrpL|DOR@lPO)X2cZf(z(G
+ZCiYtl?6=t80wvF}PrhX?#{rdO1OS&XG&%qP
+
+diff --git a/milloinviimeksi/log/development.log b/milloinviimeksi/log/development.log
+index 516fb9e..c3e7990 100644
+--- a/milloinviimeksi/log/development.log
++++ b/milloinviimeksi/log/development.log
+@@ -2361,3 +2361,39 @@ Processing EventsController#show (for 127.0.0.1 at 2010-04-09 11:27:45) [GET]
+ Rendering template within layouts/application
+ Rendering events/show
+ Completed in 29ms (View: 23, DB: 0) | 200 OK [http://localhost/events/1]
++  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
++  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
++  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;36;1mSQL (2.1ms)[0m   [0;1mCREATE TABLE "event_instances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer, "time" datetime, "created_at" datetime, "updated_at" datetime) [0m
++  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;36;1mSQL (1.8ms)[0m   [0;1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
++  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "salt" varchar(255), "hashed_password" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
++  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;36;1mSQL (1.9ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
++  [4;35;1mSQL (2.1ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
++  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
++ FROM sqlite_master
++ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
++[0m
++  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM "schema_migrations"[0m
++  [4;36;1mSQL (1.6ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100329124741')[0m
++  [4;35;1mSQL (1.7ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100325122256')[0m
++  [4;36;1mSQL (2.5ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100328152048')[0m
++  [4;35;1mSQL (1.7ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100329123847')[0m
+diff --git a/milloinviimeksi/log/test.log b/milloinviimeksi/log/test.log
+index a960214..c2c93e4 100644
+--- a/milloinviimeksi/log/test.log
++++ b/milloinviimeksi/log/test.log
+@@ -3,3 +3,9 @@
+   [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+   [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12708017722148381100', '2010-04-09 08:29:32', '2010-04-09 08:29:32', '03488e81c3c3c96dc3c2b30cba350911a7af4a565116b0648bfa2d43e06dc6767834f956756e4bf28531b74b1bc0a9aba535aa45694aff61ff92e5961351ad44')[0m
+   [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
++  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12708020302148381100', '2010-04-09 08:33:50', '2010-04-09 08:33:50', '56bed1764ee957ab9ca267a85d10816fc4d3148b478ffd1295ccd933d90e424fccc0e862875f8d5eeb7407f64f7125d2d839aa7e34313e279c318951d0debe67')[0m
++  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
++  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
++  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12708020302148381100', '2010-04-09 08:33:50', '2010-04-09 08:33:50', '56bed1764ee957ab9ca267a85d10816fc4d3148b478ffd1295ccd933d90e424fccc0e862875f8d5eeb7407f64f7125d2d839aa7e34313e279c318951d0debe67')[0m
++  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+diff --git a/milloinviimeksi/spec/model/user_spec.rb b/milloinviimeksi/spec/model/user_spec.rb
+index e046607..f1dd9aa 100644
+--- a/milloinviimeksi/spec/model/user_spec.rb
++++ b/milloinviimeksi/spec/model/user_spec.rb
+@@ -9,12 +9,12 @@ describe User do
+     u.save.should be true
+   end
+   
+-  # it "should not create a new instance w/ empty password" do
+-  #   u = User.new
+-  #   u.name = 'name'
+-  #   u.password = ''
+-  #   u.save.should be false
+-  # end
++  it "should not create a new instance w/ empty password" do
++    u = User.new
++    u.name = 'name'
++    u.password = ''
++    u.save.should be false
++  end
+   
+   it "should not create a new w/ existing name" do
+     u = User.new
+-- 
+1.7.0.3
+
