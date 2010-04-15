@@ -44,7 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resources :users
   map.resources :events do |events|
-      events.resources :event_instances, :as => "instances"
+      events.resources :event_instances, :as => "occasions"
   end
 
   map.root :controller => :events

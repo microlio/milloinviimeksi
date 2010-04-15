@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   before_filter :authenticate_required
+  
+  private
 
   def authenticate_required
     unless logged_in?

@@ -6,7 +6,7 @@
   <li>
     <h2><%= link_to event.name, event %></h2>
     <p><% if event.event_instances.last %>
-    <b><%= event.event_instances.last.time.strftime('%c') %></b> and <%= (event.event_instances.size - 1) %> other times
+    <b><%= event.event_instances.last.time.strftime('%c') %></b> <% if event.event_instances.size > 1 %>and <%= (event.event_instances.size - 1) %> other times<% end %>  
     <% else %>
     never
     <% end %>

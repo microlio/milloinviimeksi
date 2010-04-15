@@ -26,4 +26,13 @@ class EventInstancesController < ApplicationController
       render :action => "new"
     end
   end
+
+  def destroy
+    @event_instance = EventInstance.find(params[:id])
+    event = @event_instance.event
+    @event_instance.destroy
+
+    flash[:notice] = 'Occasion removed'
+    redirect_to event
+  end
 end
