@@ -1,8 +1,9 @@
 
-<h2>Name:</h2>
-<p><%=h @event.name %></p>
+<h1><%=h @event.name %></h1>
 
-<h2>Times:</h2>
+<p><%= @event.description %></p>
+
+<h3><%= @event.event_instances.size>0 ? @event.event_instances.size : 'No' %> occasion<%= 's' if @event.event_instances.size != 1 %>:</h3>
 
 <ul>
 <% @event.event_instances.each do |instance|%>

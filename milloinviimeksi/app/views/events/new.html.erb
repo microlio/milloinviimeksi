@@ -1,15 +1,4 @@
 <h1>New event</h1>
 
-<% form_for(@event) do |f| %>
-  <%= f.error_messages({:class => 'error'})%>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
+    <%= render :partial => "form" %>
 <%= link_to 'Back', events_path %>

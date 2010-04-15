@@ -2,7 +2,7 @@ section{
   display: block;
 }
 
-.warning{
+.warning, .error{
 	background-color: pink;
 	border: thin solid red;
 	padding: 0.5em;

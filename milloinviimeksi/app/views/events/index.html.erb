@@ -14,13 +14,7 @@
   </li>
 <% end %>
 <li>
-    <% form_for(@event) do |f| %>
-      <p>
-        <%= f.text_field :name, {:placeholder => 'Create a new event?'}%>
-        <%= f.submit 'Create' %>
-      </p>
-    <% end %>
-    
+    <%= render :partial => "form" %>
 </li>
 </ul>
 

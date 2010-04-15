@@ -112,3 +112,33 @@
   [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
   [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12710884892148381100', '2010-04-12 16:08:09', '2010-04-12 16:08:09', 'a0166389f0ccaef38056a96410551d5d045b17c6d307c74e453b27597461ae841664b2e7a3c6ca58b86bb1862cb4df7dc65da92ee0c433c41f986f027c926144')[0m
   [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12712305782148381100', '2010-04-14 07:36:18', '2010-04-14 07:36:18', '5bf84ffa0e86159205cc2f2c4a88638f2e065fc8dd5bf10aedf14b6c6bc79fe5a17d2ee20b9e6af37a5a3381f73e618d0fe31d6ca366d6ad2d73e8b608667ba2')[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12712305782148381100', '2010-04-14 07:36:18', '2010-04-14 07:36:18', '5bf84ffa0e86159205cc2f2c4a88638f2e065fc8dd5bf10aedf14b6c6bc79fe5a17d2ee20b9e6af37a5a3381f73e618d0fe31d6ca366d6ad2d73e8b608667ba2')[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12712324942148381100', '2010-04-14 08:08:14', '2010-04-14 08:08:14', 'd322134952c49d17b3cb7e83a4b33aa482d37f4b7109da2a0acb89bf59c51ac39d0510e1e50fa11c6fcfeb66fc1a69bcf0d7151a63cd3c0a32110f7b2cbab659')[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12712324942148381100', '2010-04-14 08:08:14', '2010-04-14 08:08:14', 'd322134952c49d17b3cb7e83a4b33aa482d37f4b7109da2a0acb89bf59c51ac39d0510e1e50fa11c6fcfeb66fc1a69bcf0d7151a63cd3c0a32110f7b2cbab659')[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Create (0.5ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12713190112148381100', '2010-04-15 08:10:11', '2010-04-15 08:10:11', 'a31369667a24621e13803ab744f4376f83685529e5880da1830053e9f62e6103556e9144e592830621a91f54e3138e38d08b3b1c2595824ef034b8b05ea0d488')[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12713190112148381100', '2010-04-15 08:10:11', '2010-04-15 08:10:11', 'a31369667a24621e13803ab744f4376f83685529e5880da1830053e9f62e6103556e9144e592830621a91f54e3138e38d08b3b1c2595824ef034b8b05ea0d488')[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12713202872148381100', '2010-04-15 08:31:27', '2010-04-15 08:31:27', '9992c38054e4015cebc6e48135951cc8d16cbbdb6c26bb4b371b258a65d647705105f91cba331b13f1364d311cc3c24c333842211b518c92fd1093d72af73b28')[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12713202872148381100', '2010-04-15 08:31:27', '2010-04-15 08:31:27', '9992c38054e4015cebc6e48135951cc8d16cbbdb6c26bb4b371b258a65d647705105f91cba331b13f1364d311cc3c24c333842211b518c92fd1093d72af73b28')[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12713214622148381100', '2010-04-15 08:51:02', '2010-04-15 08:51:02', 'ed2896541c81b12775e8537bafd05dbc2dd6ac1c616029d797bbfd1e65b827921edffeb34c6f1ba5c1b78cf6e23f34bedb9ce9f4cba5767c2597fa316e3911a6')[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m
+  [4;36;1mUser Create (0.3ms)[0m   [0;1mINSERT INTO "users" ("name", "salt", "created_at", "updated_at", "hashed_password") VALUES('name', '12713214622148381100', '2010-04-15 08:51:02', '2010-04-15 08:51:02', 'ed2896541c81b12775e8537bafd05dbc2dd6ac1c616029d797bbfd1e65b827921edffeb34c6f1ba5c1b78cf6e23f34bedb9ce9f4cba5767c2597fa316e3911a6')[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT "users".id FROM "users" WHERE ("users"."name" = 'name') LIMIT 1[0m

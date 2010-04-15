@@ -1,0 +1,7 @@
+<% form_for(@event) do |f| %>
+  <%= f.error_messages({:class => 'error'})%>
+
+  <p><%= f.label :name %><br/><%= f.text_field :name, {:placeholder => 'Create a new event?'}%></p>  
+  <p><%= f.label :description %><br/><%= f.text_area :description, {:placeholder => 'Tell something about it'}%></p>
+  <p><%= f.submit 'Create' %></p>
+<% end %>
