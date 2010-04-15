@@ -1,14 +1,23 @@
-    13.6: flog total
-    13.6: flog/method average
+    24.3: flog total
+    12.2: flog/method average
 
-    13.6: EventInstancesController#create
-     4.6: assignment
-     3.0: params
-     2.6: []
-     1.3: flash
-     1.3: redirect_to
-     1.2: render
-     1.1: branch
-     1.1: save
-     1.1: new
-     1.1: find_by_id
+    14.6: EventInstancesController#create
+     5.0: assignment
+     3.2: params
+     2.8: []
+     1.4: flash
+     1.4: redirect_to
+     1.3: render
+     1.2: branch
+     1.2: save
+     1.2: new
+     1.2: find_by_id
+     9.7: EventInstancesController#destroy
+     3.6: assignment
+     1.6: params
+     1.4: []
+     1.2: flash
+     1.2: find
+     1.2: destroy
+     1.2: redirect_to
+     1.2: event

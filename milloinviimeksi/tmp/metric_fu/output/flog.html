@@ -544,11 +544,11 @@ table td.score {
 
 
 <canvas id="graph"></canvas>
-<script language="javascript" src="flog.js?1271087722" type="text/javascript"></script>
+<script language="javascript" src="flog.js?1271320564" type="text/javascript"></script>
 
 
-<h2>Total Flog score for all methods: 137.6</h2>
-<h2>Average Flog score for all methods: 6.0</h2>
+<h2>Total Flog score for all methods: 149.6</h2>
+<h2>Average Flog score for all methods: 6.2</h2>
 
 <table>
   <tr>
@@ -569,10 +569,10 @@ table td.score {
   
     <tr>
       <td><a href="#_app_controllers_event_instances_controller_rb">/app/controllers/event_instances_controller.rb</a></td>
-      <td>14</td>
-      <td>1</td>
-      <td>14</td>
-      <td>14</td>
+      <td>24</td>
+      <td>2</td>
+      <td>12</td>
+      <td>15</td>
     </tr>
   
     <tr>
@@ -585,18 +585,10 @@ table td.score {
   
     <tr>
       <td><a href="#_app_controllers_events_controller_rb">/app/controllers/events_controller.rb</a></td>
-      <td>19</td>
-      <td>3</td>
-      <td>6</td>
+      <td>27</td>
+      <td>4</td>
+      <td>7</td>
       <td>10</td>
-    </tr>
-  
-    <tr>
-      <td><a href="#_app_models_event_rb">/app/models/event.rb</a></td>
-      <td>10</td>
-      <td>2</td>
-      <td>5</td>
-      <td>8</td>
     </tr>
   
     <tr>
@@ -609,10 +601,18 @@ table td.score {
   
     <tr>
       <td><a href="#_app_controllers_application_controller_rb">/app/controllers/application_controller.rb</a></td>
-      <td>10</td>
-      <td>3</td>
+      <td>11</td>
       <td>3</td>
       <td>4</td>
+      <td>4</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_app_models_event_rb">/app/models/event.rb</a></td>
+      <td>2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
     </tr>
   
 </table>
@@ -784,7 +784,7 @@ table td.score {
   <h2 id="_app_controllers_event_instances_controller_rb"><a href='txmt://open/?url=file:///Users/juki/mv_testi/milloinviimeksi/app/controllers/event_instances_controller.rb'>/app/controllers/event_instances_controller.rb</a></h2>
     
       <p>EventInstancesController#create</p>
-      <p>Total Score: 13.6</p>
+      <p>Total Score: 14.6</p>
       <table>
         <tr>
           <th>Score</th>
@@ -792,53 +792,103 @@ table td.score {
         </tr>
         
           <tr>
-            <td>4.6</td>
+            <td>5.0</td>
             <td>assignment</td>
           </tr>
         
           <tr>
-            <td>3.0</td>
+            <td>3.2</td>
             <td>params</td>
           </tr>
         
           <tr>
-            <td>2.6</td>
+            <td>2.8</td>
             <td>[]</td>
           </tr>
         
           <tr>
-            <td>1.3</td>
+            <td>1.4</td>
             <td>flash</td>
           </tr>
         
           <tr>
+            <td>1.4</td>
+            <td>redirect_to</td>
+          </tr>
+        
+          <tr>
             <td>1.3</td>
+            <td>render</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>save</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>find_by_id</td>
+          </tr>
+        
+      </table>
+    
+      <p>EventInstancesController#destroy</p>
+      <p>Total Score: 9.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>params</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>flash</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>find</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>destroy</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
             <td>redirect_to</td>
           </tr>
         
           <tr>
             <td>1.2</td>
-            <td>render</td>
-          </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>branch</td>
-          </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>save</td>
-          </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>new</td>
-          </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>find_by_id</td>
+            <td>event</td>
           </tr>
         
       </table>
@@ -1144,6 +1194,51 @@ table td.score {
         
       </table>
     
+      <p>EventsController#destroy</p>
+      <p>Total Score: 8.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>params</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>find</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>redirect_to</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>flash</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>destroy</td>
+          </tr>
+        
+      </table>
+    
       <p>EventsController#show</p>
       <p>Total Score: 5.9</p>
       <table>
@@ -1200,69 +1295,6 @@ table td.score {
           <tr>
             <td>1.2</td>
             <td>new</td>
-          </tr>
-        
-      </table>
-    
-
-  <h2 id="_app_models_event_rb"><a href='txmt://open/?url=file:///Users/juki/mv_testi/milloinviimeksi/app/models/event.rb'>/app/models/event.rb</a></h2>
-    
-      <p>Event#sorted_event_instances</p>
-      <p>Total Score: 8.0</p>
-      <table>
-        <tr>
-          <th>Score</th>
-          <th>Operator</th>
-        </tr>
-        
-          <tr>
-            <td>3.9</td>
-            <td>assignment</td>
-          </tr>
-        
-          <tr>
-            <td>3.0</td>
-            <td>time</td>
-          </tr>
-        
-          <tr>
-            <td>1.4</td>
-            <td>event_instances</td>
-          </tr>
-        
-          <tr>
-            <td>1.3</td>
-            <td><=></td>
-          </tr>
-        
-          <tr>
-            <td>1.2</td>
-            <td>sort</td>
-          </tr>
-        
-          <tr>
-            <td>1.2</td>
-            <td>branch</td>
-          </tr>
-        
-      </table>
-    
-      <p>Event#none</p>
-      <p>Total Score: 2.2</p>
-      <table>
-        <tr>
-          <th>Score</th>
-          <th>Operator</th>
-        </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>validates_presence_of</td>
-          </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>has_many</td>
           </tr>
         
       </table>
@@ -1333,6 +1365,36 @@ table td.score {
 
   <h2 id="_app_controllers_application_controller_rb"><a href='txmt://open/?url=file:///Users/juki/mv_testi/milloinviimeksi/app/controllers/application_controller.rb'>/app/controllers/application_controller.rb</a></h2>
     
+      <p>ApplicationController#none</p>
+      <p>Total Score: 4.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>helper</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>protect_from_forgery</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>before_filter</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
       <p>ApplicationController#authenticate_required</p>
       <p>Total Score: 4.4</p>
       <table>
@@ -1363,31 +1425,6 @@ table td.score {
         
       </table>
     
-      <p>ApplicationController#none</p>
-      <p>Total Score: 3.3</p>
-      <table>
-        <tr>
-          <th>Score</th>
-          <th>Operator</th>
-        </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>helper</td>
-          </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>protect_from_forgery</td>
-          </tr>
-        
-          <tr>
-            <td>1.1</td>
-            <td>before_filter</td>
-          </tr>
-        
-      </table>
-    
       <p>ApplicationController#logged_in?</p>
       <p>Total Score: 2.6</p>
       <table>
@@ -1409,7 +1446,30 @@ table td.score {
       </table>
     
 
-<p>Generated on Mon Apr 12 18:55:22 +0300 2010</p>	
+  <h2 id="_app_models_event_rb"><a href='txmt://open/?url=file:///Users/juki/mv_testi/milloinviimeksi/app/models/event.rb'>/app/models/event.rb</a></h2>
+    
+      <p>Event#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>validates_presence_of</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>has_many</td>
+          </tr>
+        
+      </table>
+    
+
+<p>Generated on Thu Apr 15 11:36:04 +0300 2010</p>	
 
     </div>
   </body>

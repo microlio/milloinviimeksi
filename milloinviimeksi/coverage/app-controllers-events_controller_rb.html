@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-events_controller_rb.html">app/controllers/events_controller.rb</a></td>
-            <td class='right_align'><tt>28</tt></td>
-            <td class='right_align'><tt>19</tt></td>
+            <td class='right_align'><tt>34</tt></td>
+            <td class='right_align'><tt>25</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -213,19 +213,55 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line27">27</a>   </pre></td>
+            <td><pre><a name="line27">27</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line28">28</a>   def destroy</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line29">29</a>     @event = Event.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line30">30</a>     @event.destroy</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line31">31</a>     flash[:notice] = 'Event removed'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line32">32</a>     redirect_to :events</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line28">28</a> end</pre></td>
+            <td><pre><a name="line33">33</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Mon Apr 12 19:08:11 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Thu Apr 15 12:22:40 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

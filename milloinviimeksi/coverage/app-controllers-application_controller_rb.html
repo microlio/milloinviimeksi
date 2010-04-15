@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-application_controller_rb.html">app/controllers/application_controller.rb</a></td>
-            <td class='right_align'><tt>23</tt></td>
-            <td class='right_align'><tt>14</tt></td>
+            <td class='right_align'><tt>25</tt></td>
+            <td class='right_align'><tt>15</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -105,97 +105,109 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line9">9</a> </pre></td>
+            <td><pre><a name="line9">9</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line10">10</a>   def authenticate_required</pre></td>
+            <td><pre><a name="line10">10</a>   private</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line11">11</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line11">11</a>     unless logged_in?</pre></td>
+            <td><pre><a name="line12">12</a>   def authenticate_required</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line12">12</a>       redirect_to session_path</pre></td>
+            <td><pre><a name="line13">13</a>     unless logged_in?</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line13">13</a>       return false</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line14">14</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line15">15</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line16">16</a> </pre></td>
+            <td><pre><a name="line14">14</a>       redirect_to session_path</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line17">17</a>   def logged_in?</pre></td>
+            <td><pre><a name="line15">15</a>       return false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line16">16</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line18">18</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line18">18</a>     session[:user_id]</pre></td>
+            <td><pre><a name="line19">19</a>   def logged_in?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line20">20</a>     session[:user_id]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line19">19</a>   end</pre></td>
+            <td><pre><a name="line21">21</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line20">20</a> </pre></td>
+            <td><pre><a name="line22">22</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line21">21</a>   # Scrub sensitive parameters from your log</pre></td>
+            <td><pre><a name="line23">23</a>   # Scrub sensitive parameters from your log</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line22">22</a>   # filter_parameter_logging :password</pre></td>
+            <td><pre><a name="line24">24</a>   # filter_parameter_logging :password</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line23">23</a> end</pre></td>
+            <td><pre><a name="line25">25</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Mon Apr 12 19:08:11 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Thu Apr 15 12:22:40 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>
