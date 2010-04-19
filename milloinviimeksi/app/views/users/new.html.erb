@@ -1,2 +1,24 @@
-<h1>User#new</h1>
-<p>Find me in app/views/user/new.html.erb</p>
+<h2>Register</h2> 
+
+<% form_for(@user) do |f| %>
+  <%= f.error_messages({:class => 'error'})%>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation%><br />
+    <%= f.password_field :password_confirmation %><br />
+  </p>
+  <p>
+    <%= f.submit "Ok" %>
+  </p>
+<% end %>
+
+<br />
+
+<%= link_to 'Back', session_path %> 

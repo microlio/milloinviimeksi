@@ -7,7 +7,7 @@
 
 <ul>
 <% @event.event_instances.each do |instance|%>
-    <li><%= instance.time %> <%= link_to( 'Delete', [@event, instance], :method => :delete) %></li>
+    <li><%= instance.time %> <%= link_to( 'Delete', [@event, instance], :method => :delete, :confirm => "Are you sure?") %></li>
 <% end %>
 <li>
   <% form_for([@event, @event_instance]) do |f| %>
@@ -17,5 +17,5 @@
   <% end %>
 </li>
 </ul>
-<p><%= link_to 'Remove this event', @event, :method => :delete %></p>
+<p><%= link_to 'Remove this event', @event, :method => :delete, :confirm => "Are you sure?" %></p>
 <p><%= link_to 'Back', events_path %></p>

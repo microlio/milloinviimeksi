@@ -1,2 +1,33 @@
-<h1>User#edit</h1>
-<pre><%= @user.inspect %></pre>
+<h1>Edit user</h1> 
+
+
+<% form_for(@user) do |f| %>
+  <%= f.error_messages({:class => 'error'})%>
+  <p>
+    <%= f.label :name %><br />
+    <%= @user.name %>
+  </p>
+  <p>
+    <%= f.label :first_names %><br />
+    <%= f.text_field :first_names %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :password, 'New password' %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation, 'Confirm new password' %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<br />
+
+<%= link_to 'Back', events_path %> 
