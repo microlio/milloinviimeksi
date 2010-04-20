@@ -15,10 +15,10 @@
      2.4: assignment
      1.6: params
      1.4: []
-     1.2: find
-     1.2: redirect_to
      1.2: flash
      1.2: destroy
+     1.2: find
+     1.2: redirect_to
      5.9: EventsController#show
      2.4: assignment
      1.6: params
@@ -27,5 +27,5 @@
      1.2: find
      3.4: EventsController#index
      2.4: assignment
-     1.2: all
      1.2: new
+     1.2: all

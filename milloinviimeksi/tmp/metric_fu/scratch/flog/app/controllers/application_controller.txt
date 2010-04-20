@@ -4,13 +4,13 @@
      4.4: ApplicationController#none
      1.1: helper
      1.1: protect_from_forgery
-     1.1: before_filter
      1.1: private
+     1.1: before_filter
      4.4: ApplicationController#authenticate_required
      1.6: session_path
      1.4: redirect_to
-     1.2: logged_in?
      1.2: branch
+     1.2: logged_in?
      2.6: ApplicationController#logged_in?
      1.4: session
      1.2: []

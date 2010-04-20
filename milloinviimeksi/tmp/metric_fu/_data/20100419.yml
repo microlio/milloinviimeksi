@@ -1,492 +1,447 @@
 --- 
 :stats: 
+  :code_to_test_ratio: 0.2
   :lines: 
   - :methods: 21
-    :loc: 117
-    :lines: 171
     :classes: 5
+    :lines: 171
+    :loc: 102
     :methods_per_class: 4
-    :loc_per_method: 3
     :name: Controllers
+    :loc_per_method: 2
   - :methods: 0
-    :loc: 6
+    :classes: 0
     :lines: 7
-    :classes: 0
+    :loc: 6
     :methods_per_class: 0
-    :loc_per_method: 0
     :name: Helpers
+    :loc_per_method: 0
   - :methods: 6
-    :loc: 47
+    :classes: 3
     :lines: 66
-    :classes: 3
+    :loc: 47
     :methods_per_class: 2
-    :loc_per_method: 5
     :name: Models
-  - :methods: 0
-    :loc: 0
-    :lines: 0
-    :classes: 0
-    :methods_per_class: 0
-    :loc_per_method: 0
-    :name: Libraries
-  - :methods: 0
-    :loc: 12
-    :lines: 16
-    :classes: 2
-    :methods_per_class: 0
-    :loc_per_method: 0
-    :name: Functional tests
-  - :methods: 0
-    :loc: 12
-    :lines: 16
-    :classes: 3
-    :methods_per_class: 0
-    :loc_per_method: 0
-    :name: Unit tests
-  - :methods: 27
-    :loc: 194
-    :lines: 276
-    :classes: 13
-    :methods_per_class: 2
     :loc_per_method: 5
+  - :methods: 0
+    :classes: 0
+    :lines: 0
+    :loc: 0
+    :methods_per_class: 0
+    :name: Libraries
+    :loc_per_method: 0
+  - :methods: 0
+    :classes: 2
+    :lines: 16
+    :loc: 12
+    :methods_per_class: 0
+    :name: Functional tests
+    :loc_per_method: 0
+  - :methods: 0
+    :classes: 3
+    :lines: 16
+    :loc: 12
+    :methods_per_class: 0
+    :name: Unit tests
+    :loc_per_method: 0
+  - :methods: 27
+    :classes: 13
+    :lines: 276
+    :loc: 179
+    :methods_per_class: 2
     :name: Total
-  :codeLOC: 170
+    :loc_per_method: 4
+  :codeLOC: 155
   :testLOC: 24
-  :code_to_test_ratio: 0.1
 :flog: 
-  :total: 189.0
-  :average: 6.3
+  :total: 166.1
   :pages: 
   - :path: /app/controllers/sessions_controller.rb
+    :score: 31.6
     :highest_score: 18.4
     :average_score: 6.3
     :scanned_methods: 
     - :score: 18.4
       :name: SessionsController#create
       :operators: 
-      - :operator: "[]"
-        :score: 6.4
-      - :operator: assignment
-        :score: 3.9
-      - :operator: params
-        :score: 3.8
-      - :operator: flash
-        :score: 2.6
-      - :operator: redirect_to
-        :score: 2.6
-      - :operator: authenticate
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
-      - :operator: log_user_in
-        :score: 1.2
+      - :score: 6.4
+        :operator: "[]"
+      - :score: 3.9
+        :operator: assignment
+      - :score: 3.8
+        :operator: params
+      - :score: 2.6
+        :operator: redirect_to
+      - :score: 2.6
+        :operator: flash
+      - :score: 1.3
+        :operator: authenticate
+      - :score: 1.2
+        :operator: branch
+      - :score: 1.2
+        :operator: log_user_in
     - :score: 5.1
       :name: SessionsController#destroy
       :operators: 
-      - :operator: root_path
-        :score: 1.4
-      - :operator: flash
-        :score: 1.2
-      - :operator: assignment
-        :score: 1.2
-      - :operator: redirect_to
-        :score: 1.2
-      - :operator: reset_session
-        :score: 1.2
+      - :score: 1.4
+        :operator: root_path
+      - :score: 1.2
+        :operator: reset_session
+      - :score: 1.2
+        :operator: redirect_to
+      - :score: 1.2
+        :operator: flash
+      - :score: 1.2
+        :operator: assignment
     - :score: 3.1
       :name: SessionsController#log_user_in
       :operators: 
-      - :operator: assignment
-        :score: 1.3
-      - :operator: session
-        :score: 1.3
-      - :operator: id
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
+      - :score: 1.3
+        :operator: session
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: id
+      - :score: 1.2
+        :operator: branch
     - :score: 2.8
       :name: SessionsController#show
       :operators: 
-      - :operator: redirect_to
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
-      - :operator: logged_in?
-        :score: 1.2
+      - :score: 1.3
+        :operator: redirect_to
+      - :score: 1.2
+        :operator: branch
+      - :score: 1.2
+        :operator: logged_in?
     - :score: 2.2
       :name: SessionsController#none
       :operators: 
-      - :operator: skip_before_filter
-        :score: 1.1
-      - :operator: protect_from_forgery
-        :score: 1.1
-    :score: 31.6
+      - :score: 1.1
+        :operator: protect_from_forgery
+      - :score: 1.1
+        :operator: skip_before_filter
   - :path: /app/controllers/event_instances_controller.rb
+    :score: 24.3
     :highest_score: 14.6
     :average_score: 12.2
     :scanned_methods: 
     - :score: 14.6
       :name: EventInstancesController#create
       :operators: 
-      - :operator: assignment
-        :score: 5.0
-      - :operator: params
-        :score: 3.2
-      - :operator: "[]"
-        :score: 2.8
-      - :operator: flash
-        :score: 1.4
-      - :operator: redirect_to
-        :score: 1.4
-      - :operator: render
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
-      - :operator: save
-        :score: 1.2
-      - :operator: new
-        :score: 1.2
-      - :operator: find_by_id
-        :score: 1.2
+      - :score: 5.0
+        :operator: assignment
+      - :score: 3.2
+        :operator: params
+      - :score: 2.8
+        :operator: "[]"
+      - :score: 1.4
+        :operator: flash
+      - :score: 1.4
+        :operator: redirect_to
+      - :score: 1.3
+        :operator: render
+      - :score: 1.2
+        :operator: branch
+      - :score: 1.2
+        :operator: find_by_id
+      - :score: 1.2
+        :operator: new
+      - :score: 1.2
+        :operator: save
     - :score: 9.7
       :name: EventInstancesController#destroy
       :operators: 
-      - :operator: assignment
-        :score: 3.6
-      - :operator: params
-        :score: 1.6
-      - :operator: "[]"
-        :score: 1.4
-      - :operator: flash
-        :score: 1.2
-      - :operator: find
-        :score: 1.2
-      - :operator: destroy
-        :score: 1.2
-      - :operator: redirect_to
-        :score: 1.2
-      - :operator: event
-        :score: 1.2
-    :score: 24.3
+      - :score: 3.6
+        :operator: assignment
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.2
+        :operator: destroy
+      - :score: 1.2
+        :operator: event
+      - :score: 1.2
+        :operator: find
+      - :score: 1.2
+        :operator: flash
+      - :score: 1.2
+        :operator: redirect_to
   - :path: /app/controllers/users_controller.rb
-    :highest_score: 14.2
-    :average_score: 6.2
+    :score: 14.1
+    :highest_score: 11.3
+    :average_score: 4.7
     :scanned_methods: 
-    - :score: 14.2
-      :name: UsersController#update
-      :operators: 
-      - :operator: params
-        :score: 3.2
-      - :operator: "[]"
-        :score: 2.8
-      - :operator: assignment
-        :score: 2.6
-      - :operator: name
-        :score: 1.4
-      - :operator: redirect_to
-        :score: 1.4
-      - :operator: flash
-        :score: 1.4
-      - :operator: render
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
-      - :operator: find
-        :score: 1.2
-      - :operator: update_attributes
-        :score: 1.2
     - :score: 11.3
       :name: UsersController#create
       :operators: 
-      - :operator: assignment
-        :score: 2.6
-      - :operator: params
-        :score: 1.6
-      - :operator: flash
-        :score: 1.4
-      - :operator: name
-        :score: 1.4
-      - :operator: redirect_to
-        :score: 1.4
-      - :operator: "[]"
-        :score: 1.4
-      - :operator: render
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
-      - :operator: new
-        :score: 1.2
-      - :operator: save
-        :score: 1.2
-    - :score: 4.4
-      :name: UsersController#edit
-      :operators: 
-      - :operator: params
-        :score: 1.6
-      - :operator: "[]"
-        :score: 1.4
-      - :operator: find
-        :score: 1.2
-      - :operator: assignment
-        :score: 1.2
-    - :score: 4.4
-      :name: UsersController#show
-      :operators: 
-      - :operator: params
-        :score: 1.6
-      - :operator: "[]"
-        :score: 1.4
-      - :operator: find
-        :score: 1.2
-      - :operator: assignment
-        :score: 1.2
+      - :score: 2.6
+        :operator: assignment
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: name
+      - :score: 1.4
+        :operator: redirect_to
+      - :score: 1.4
+        :operator: flash
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.3
+        :operator: render
+      - :score: 1.2
+        :operator: new
+      - :score: 1.2
+        :operator: save
+      - :score: 1.2
+        :operator: branch
     - :score: 1.7
       :name: UsersController#new
       :operators: 
-      - :operator: assignment
-        :score: 1.2
-      - :operator: new
-        :score: 1.2
+      - :score: 1.2
+        :operator: new
+      - :score: 1.2
+        :operator: assignment
     - :score: 1.1
       :name: UsersController#none
       :operators: 
-      - :operator: skip_before_filter
-        :score: 1.1
-    :score: 37.0
+      - :score: 1.1
+        :operator: skip_before_filter
   - :path: /app/models/user.rb
+    :score: 46.0
     :highest_score: 10.8
     :average_score: 6.6
     :scanned_methods: 
     - :score: 10.8
       :name: User#none
       :operators: 
-      - :operator: validates_presence_of
-        :score: 2.4
-      - :operator: attr_accessor
-        :score: 2.4
-      - :operator: private
-        :score: 1.2
-      - :operator: validates_uniqueness_of
-        :score: 1.2
-      - :operator: validates_confirmation_of
-        :score: 1.2
-      - :operator: before_save
-        :score: 1.2
-      - :operator: before_create
-        :score: 1.2
+      - :score: 2.4
+        :operator: validates_presence_of
+      - :score: 2.4
+        :operator: attr_accessor
+      - :score: 1.2
+        :operator: validates_uniqueness_of
+      - :score: 1.2
+        :operator: before_save
+      - :score: 1.2
+        :operator: private
+      - :score: 1.2
+        :operator: before_create
+      - :score: 1.2
+        :operator: validates_confirmation_of
     - :score: 10.2
       :name: User#hash_password
       :operators: 
-      - :operator: password
-        :score: 3.0
-      - :operator: salt
-        :score: 2.8
-      - :operator: branch
-        :score: 2.6
-      - :operator: create_salt
-        :score: 1.4
-      - :operator: assignment
-        :score: 1.3
-      - :operator: blank?
-        :score: 1.3
-      - :operator: hash_plaintext_password
-        :score: 1.3
+      - :score: 3.0
+        :operator: password
+      - :score: 2.8
+        :operator: salt
+      - :score: 2.6
+        :operator: branch
+      - :score: 1.4
+        :operator: create_salt
+      - :score: 1.3
+        :operator: blank?
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: hash_plaintext_password
     - :score: 6.4
       :name: User#authenticate
       :operators: 
-      - :operator: branch
-        :score: 2.6
-      - :operator: new
-        :score: 1.6
-      - :operator: correct_password?
-        :score: 1.4
-      - :operator: raise
-        :score: 1.4
-      - :operator: assignment
-        :score: 1.3
-      - :operator: find_by_name
-        :score: 1.3
+      - :score: 2.6
+        :operator: branch
+      - :score: 1.6
+        :operator: new
+      - :score: 1.4
+        :operator: correct_password?
+      - :score: 1.4
+        :operator: raise
+      - :score: 1.3
+        :operator: find_by_name
+      - :score: 1.3
+        :operator: assignment
     - :score: 6.0
       :name: User#correct_password?
       :operators: 
-      - :operator: salt
-        :score: 1.7
-      - :operator: hashed_password
-        :score: 1.5
-      - :operator: hash_plaintext_password
-        :score: 1.5
-      - :operator: ==
-        :score: 1.3
+      - :score: 1.7
+        :operator: salt
+      - :score: 1.5
+        :operator: hashed_password
+      - :score: 1.5
+        :operator: hash_plaintext_password
+      - :score: 1.3
+        :operator: ==
     - :score: 5.7
       :name: User#create_salt
       :operators: 
-      - :operator: now
-        :score: 1.5
-      - :operator: current
-        :score: 1.5
-      - :operator: object_id
-        :score: 1.3
-      - :operator: assignment
-        :score: 1.3
-      - :operator: strftime
-        :score: 1.3
+      - :score: 1.5
+        :operator: current
+      - :score: 1.5
+        :operator: now
+      - :score: 1.3
+        :operator: object_id
+      - :score: 1.3
+        :operator: strftime
+      - :score: 1.3
+        :operator: assignment
     - :score: 5.7
       :name: User#hash_plaintext_password
       :operators: 
-      - :operator: "<<"
-        :score: 2.6
-      - :operator: assignment
-        :score: 1.3
-      - :operator: new
-        :score: 1.3
-      - :operator: to_s
-        :score: 1.3
-      - :operator: lit_fixnum
-        :score: 0.4
+      - :score: 2.6
+        :operator: "<<"
+      - :score: 1.3
+        :operator: to_s
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: new
+      - :score: 0.4
+        :operator: lit_fixnum
     - :score: 1.1
       :name: main#none
       :operators: 
-      - :operator: require
-        :score: 1.1
-    :score: 46.0
+      - :score: 1.1
+        :operator: require
   - :path: /app/controllers/events_controller.rb
+    :score: 27.4
     :highest_score: 9.9
     :average_score: 6.8
     :scanned_methods: 
     - :score: 9.9
       :name: EventsController#create
       :operators: 
-      - :operator: assignment
-        :score: 2.6
-      - :operator: params
-        :score: 1.6
-      - :operator: flash
-        :score: 1.4
-      - :operator: redirect_to
-        :score: 1.4
-      - :operator: "[]"
-        :score: 1.4
-      - :operator: render
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
-      - :operator: new
-        :score: 1.2
-      - :operator: save
-        :score: 1.2
+      - :score: 2.6
+        :operator: assignment
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: flash
+      - :score: 1.4
+        :operator: redirect_to
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.3
+        :operator: render
+      - :score: 1.2
+        :operator: branch
+      - :score: 1.2
+        :operator: new
+      - :score: 1.2
+        :operator: save
     - :score: 8.2
       :name: EventsController#destroy
       :operators: 
-      - :operator: assignment
-        :score: 2.4
-      - :operator: params
-        :score: 1.6
-      - :operator: "[]"
-        :score: 1.4
-      - :operator: find
-        :score: 1.2
-      - :operator: redirect_to
-        :score: 1.2
-      - :operator: flash
-        :score: 1.2
-      - :operator: destroy
-        :score: 1.2
+      - :score: 2.4
+        :operator: assignment
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.2
+        :operator: flash
+      - :score: 1.2
+        :operator: destroy
+      - :score: 1.2
+        :operator: find
+      - :score: 1.2
+        :operator: redirect_to
     - :score: 5.9
       :name: EventsController#show
       :operators: 
-      - :operator: assignment
-        :score: 2.4
-      - :operator: params
-        :score: 1.6
-      - :operator: "[]"
-        :score: 1.4
-      - :operator: new
-        :score: 1.2
-      - :operator: find
-        :score: 1.2
+      - :score: 2.4
+        :operator: assignment
+      - :score: 1.6
+        :operator: params
+      - :score: 1.4
+        :operator: "[]"
+      - :score: 1.2
+        :operator: new
+      - :score: 1.2
+        :operator: find
     - :score: 3.4
       :name: EventsController#index
       :operators: 
-      - :operator: assignment
-        :score: 2.4
-      - :operator: all
-        :score: 1.2
-      - :operator: new
-        :score: 1.2
-    :score: 27.4
+      - :score: 2.4
+        :operator: assignment
+      - :score: 1.2
+        :operator: new
+      - :score: 1.2
+        :operator: all
   - :path: /app/models/event_instance.rb
+    :score: 9.1
     :highest_score: 6.9
     :average_score: 4.6
     :scanned_methods: 
     - :score: 6.9
       :name: EventInstance#must_be_in_past
       :operators: 
-      - :operator: errors
-        :score: 1.5
-      - :operator: now
-        :score: 1.4
-      - :operator: time
-        :score: 1.4
-      - :operator: add_to_base
-        :score: 1.3
-      - :operator: branch
-        :score: 1.2
-      - :operator: <
-        :score: 1.2
+      - :score: 1.5
+        :operator: errors
+      - :score: 1.4
+        :operator: now
+      - :score: 1.4
+        :operator: time
+      - :score: 1.3
+        :operator: add_to_base
+      - :score: 1.2
+        :operator: <
+      - :score: 1.2
+        :operator: branch
     - :score: 2.2
       :name: EventInstance#none
       :operators: 
-      - :operator: belongs_to
-        :score: 1.1
-      - :operator: validate
-        :score: 1.1
-    :score: 9.1
+      - :score: 1.1
+        :operator: belongs_to
+      - :score: 1.1
+        :operator: validate
   - :path: /app/controllers/application_controller.rb
+    :score: 11.4
     :highest_score: 4.4
     :average_score: 3.8
     :scanned_methods: 
     - :score: 4.4
       :name: ApplicationController#none
       :operators: 
-      - :operator: helper
-        :score: 1.1
-      - :operator: protect_from_forgery
-        :score: 1.1
-      - :operator: before_filter
-        :score: 1.1
-      - :operator: private
-        :score: 1.1
+      - :score: 1.1
+        :operator: helper
+      - :score: 1.1
+        :operator: protect_from_forgery
+      - :score: 1.1
+        :operator: private
+      - :score: 1.1
+        :operator: before_filter
     - :score: 4.4
       :name: ApplicationController#authenticate_required
       :operators: 
-      - :operator: session_path
-        :score: 1.6
-      - :operator: redirect_to
-        :score: 1.4
-      - :operator: logged_in?
-        :score: 1.2
-      - :operator: branch
-        :score: 1.2
+      - :score: 1.6
+        :operator: session_path
+      - :score: 1.4
+        :operator: redirect_to
+      - :score: 1.2
+        :operator: branch
+      - :score: 1.2
+        :operator: logged_in?
     - :score: 2.6
       :name: ApplicationController#logged_in?
       :operators: 
-      - :operator: session
-        :score: 1.4
-      - :operator: "[]"
-        :score: 1.2
-    :score: 11.4
+      - :score: 1.4
+        :operator: session
+      - :score: 1.2
+        :operator: "[]"
   - :path: /app/models/event.rb
+    :score: 2.2
     :highest_score: 2.2
     :average_score: 2.2
     :scanned_methods: 
     - :score: 2.2
       :name: Event#none
       :operators: 
-      - :operator: validates_presence_of
-        :score: 1.1
-      - :operator: has_many
-        :score: 1.1
-    :score: 2.2
+      - :score: 1.1
+        :operator: validates_presence_of
+      - :score: 1.1
+        :operator: has_many
+  :average: 6.2
 :flay: 
   :matches: []
 
@@ -498,23 +453,23 @@
 
   - :file_path: app/controllers/event_instances_controller.rb
     :code_smells: 
-    - :type: Irresponsible Module
+    - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: EventInstancesController
     - :type: Duplication
       :message: calls params twice
       :method: EventInstancesController#create
-    - :type: Long Method
+    - :type: LongMethod
       :message: has approx 6 statements
       :method: EventInstancesController#create
   - :file_path: app/controllers/events_controller.rb
     :code_smells: 
-    - :type: Irresponsible Module
+    - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: EventsController
   - :file_path: app/controllers/sessions_controller.rb
     :code_smells: 
-    - :type: Irresponsible Module
+    - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: SessionsController
     - :type: Duplication
@@ -529,20 +484,17 @@
     - :type: Duplication
       :message: calls redirect_to(:root) twice
       :method: SessionsController#create
-    - :type: Long Method
+    - :type: LongMethod
       :message: has approx 7 statements
       :method: SessionsController#create
-    - :type: Control Couple
+    - :type: ControlCouple
       :message: is controlled by argument user
       :method: SessionsController#log_user_in
   - :file_path: app/controllers/users_controller.rb
     :code_smells: 
-    - :type: Irresponsible Module
+    - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: UsersController
-    - :type: Duplication
-      :message: calls params twice
-      :method: UsersController#update
   - :file_path: app/helpers/application_helper.rb
     :code_smells: []
 
@@ -554,192 +506,253 @@
 
   - :file_path: app/models/event.rb
     :code_smells: 
-    - :type: Irresponsible Module
+    - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: Event
   - :file_path: app/models/event_instance.rb
     :code_smells: 
-    - :type: Irresponsible Module
+    - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: EventInstance
   - :file_path: app/models/user.rb
     :code_smells: 
-    - :type: Irresponsible Module
+    - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: User
     - :type: Duplication
       :message: calls self.password twice
       :method: User#hash_password
 :churn: 
-  :changes: 
-  - :file_path: milloinviimeksi/log/development.log
-    :times_changed: 10
-  - :file_path: milloinviimeksi/config/routes.rb
-    :times_changed: 7
-  - :file_path: milloinviimeksi/db/development.sqlite3
-    :times_changed: 7
-  - :file_path: milloinviimeksi/app/views/events/index.html.erb
-    :times_changed: 5
-  - :file_path: milloinviimeksi/log/test.log
-    :times_changed: 5
-  - :file_path: milloinviimeksi/app/views/events/show.html.erb
-    :times_changed: 5
-  - :file_path: milloinviimeksi/app/controllers/events_controller.rb
-    :times_changed: 4
-  - :file_path: milloinviimeksi/log/cucumber.log
-    :times_changed: 4
-  - :file_path: milloinviimeksi/.idea/workspace.xml
-    :times_changed: 4
-  - :file_path: milloinviimeksi/coverage/index.html
-    :times_changed: 4
-  - :file_path: milloinviimeksi/db/schema.rb
-    :times_changed: 4
-  - :file_path: milloinviimeksi/app/controllers/application_controller.rb
-    :times_changed: 4
-  - :file_path: milloinviimeksi/db/test.sqlite3
-    :times_changed: 3
-  - :file_path: milloinviimeksi/app/controllers/sessions_controller.rb
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/event_instances_controller.txt
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-helpers-user_helper_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/flog.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/reek.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-controllers-users_controller_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-helpers-session_helper_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/events_controller.txt
-    :times_changed: 3
-  - :file_path: milloinviimeksi/app/models/user.rb
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/models/event.txt
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-models-event_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/app/models/event.rb
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/index.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/Rakefile
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/report.yml
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/stats/stats.txt
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage.data
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-models-event_instance_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/roodi.js
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-helpers-application_helper_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-controllers-application_controller_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-models-user_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/application_controller.txt
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/roodi.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/reek.js
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/stats.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-controllers-events_controller_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/churn.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-controllers-sessions_controller_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/flay.js
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/saikuro.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/flay.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/tmp/metric_fu/output/flog.js
-    :times_changed: 3
-  - :file_path: milloinviimeksi/coverage/app-controllers-event_instances_controller_rb.html
-    :times_changed: 3
-  - :file_path: milloinviimeksi/app/controllers/event_instances_controller.rb
-    :times_changed: 3
-  - :file_path: milloinviimeksi/app/views/events/new.html.erb
-    :times_changed: 3
   :changed_methods: []
 
-  :class_churn: []
+  :method_churn: []
 
   :changed_files: 
-  - milloinviimeksi/tmp/metric_fu/scratch/flog/app/models/event.txt
   - "---- "
-  - milloinviimeksi/scratch_directory/saikuro/app/views/users/update.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/users/destroy.html.erb_cyclo.html
-  - milloinviimeksi/Rakefile
-  - milloinviimeksi/scratch_directory/saikuro/app/helpers/application_helper.rb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/controllers/sessions_controller.rb_cyclo.html
+  - milloinviimeksi/tmp/metric_fu/scratch/flog/app/models/user.txt
+  - milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/users_controller.txt
   - milloinviimeksi/coverage/app-helpers-user_helper_rb.html
+  - milloinviimeksi/app/controllers/.tmp_sessions_controller.rb_cyclo.html.38048~
   - milloinviimeksi/tmp/metric_fu/report.yml
   - milloinviimeksi/tmp/metric_fu/output/saikuro.html
   - milloinviimeksi/tmp/metric_fu/output/flog.js
-  - milloinviimeksi/tmp/metric_fu/_data/20100415.yml
-  - milloinviimeksi/tmp/metric_fu/_data/20100413.yml
-  - milloinviimeksi/scratch_directory/saikuro/app/views/events/show.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/events/index.html.erb_cyclo.html
+  - milloinviimeksi/log/cucumber.log
   - milloinviimeksi/coverage/app-models-user_rb.html
   - milloinviimeksi/coverage/app-controllers-users_controller_rb.html
-  - milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/event_instances_controller.txt
+  - milloinviimeksi/app/views/events/show.html.erb
   - milloinviimeksi/tmp/metric_fu/output/churn.html
   - milloinviimeksi/scratch_directory/saikuro/index_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/models/event_instance.rb_cyclo.html
+  - milloinviimeksi/log/test.log
+  - milloinviimeksi/features/user.feature
+  - milloinviimeksi/app/controllers/users_controller.rb
   - milloinviimeksi/tmp/metric_fu/scratch/stats/stats.txt
-  - milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/events_controller.txt
-  - milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/application_controller.txt
   - milloinviimeksi/tmp/metric_fu/output/flay.js
   - milloinviimeksi/scratch_directory/saikuro/app/views/users/edit.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/layouts/application.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/event_instances/new.html.erb_cyclo.html
   - milloinviimeksi/coverage/app-models-event_instance_rb.html
+  - milloinviimeksi/app/models/user.rb
   - milloinviimeksi/tmp/metric_fu/output/roodi.js
   - milloinviimeksi/tmp/metric_fu/output/roodi.html
-  - milloinviimeksi/scratch_directory/saikuro/app/controllers/events_controller.rb_cyclo.html
+  - milloinviimeksi/tmp/metric_fu/scratch/saikuro/saikuro.html
   - milloinviimeksi/tmp/metric_fu/output/flay.html
-  - milloinviimeksi/tmp/f4acde81b543588dda43b2aa6b92ba724d7f0ee9.json
+  - milloinviimeksi/tmp/4c7c85f4301e5fe2d2f70ebdbfb385d77fcd2eb3.json
   - milloinviimeksi/scratch_directory/saikuro/app/views/users/new.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/helpers/user_helper.rb_cyclo.html
+  - milloinviimeksi/log/development.log
   - milloinviimeksi/coverage/app-helpers-session_helper_rb.html
+  - milloinviimeksi/app/views/sessions/show.html.erb
   - milloinviimeksi/tmp/metric_fu/output/stats.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/events/new.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/event_instances/index.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/models/event.rb_cyclo.html
   - milloinviimeksi/scratch_directory/saikuro/app/controllers/users_controller.rb_cyclo.html
   - milloinviimeksi/coverage/app-controllers-sessions_controller_rb.html
   - milloinviimeksi/coverage/app-controllers-events_controller_rb.html
   - milloinviimeksi/tmp/metric_fu/output/flog.html
+  - milloinviimeksi/tmp/metric_fu/_data/20100419.yml
   - milloinviimeksi/coverage/app-controllers-event_instances_controller_rb.html
   - milloinviimeksi/coverage/app-controllers-application_controller_rb.html
+  - milloinviimeksi/app/views/users/new.html.erb
+  - milloinviimeksi/app/views/users/edit.html.erb
   - milloinviimeksi/tmp/metric_fu/output/reek.js
   - milloinviimeksi/tmp/metric_fu/output/reek.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/users/create.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/sessions/show.html.erb_cyclo.html
-  - /dev/null
   - milloinviimeksi/scratch_directory/saikuro/app/models/user.rb_cyclo.html
   - milloinviimeksi/coverage/app-models-event_rb.html
+  - /dev/null
   - milloinviimeksi/tmp/metric_fu/output/index.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/users/show.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/views/events/_form.html.erb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/helpers/session_helper.rb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/controllers/event_instances_controller.rb_cyclo.html
-  - milloinviimeksi/scratch_directory/saikuro/app/controllers/application_controller.rb_cyclo.html
   - milloinviimeksi/coverage/index.html
   - milloinviimeksi/coverage/app-helpers-application_helper_rb.html
-  :method_churn: []
-
   :changed_classes: []
+
+  :changes: 
+  - :file_path: milloinviimeksi/log/development.log
+    :times_changed: 11
+  - :file_path: milloinviimeksi/db/development.sqlite3
+    :times_changed: 8
+  - :file_path: milloinviimeksi/config/routes.rb
+    :times_changed: 7
+  - :file_path: milloinviimeksi/app/views/events/show.html.erb
+    :times_changed: 6
+  - :file_path: milloinviimeksi/log/test.log
+    :times_changed: 6
+  - :file_path: milloinviimeksi/log/cucumber.log
+    :times_changed: 5
+  - :file_path: milloinviimeksi/db/schema.rb
+    :times_changed: 5
+  - :file_path: milloinviimeksi/app/controllers/application_controller.rb
+    :times_changed: 5
+  - :file_path: milloinviimeksi/app/views/events/index.html.erb
+    :times_changed: 5
+  - :file_path: milloinviimeksi/coverage/index.html
+    :times_changed: 5
+  - :file_path: milloinviimeksi/app/models/user.rb
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/events_controller.txt
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/reek.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/saikuro.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/flay.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/flay.js
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/flog.js
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-controllers-sessions_controller_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/churn.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-controllers-events_controller_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/stats.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/app/controllers/sessions_controller.rb
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-controllers-event_instances_controller_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/reek.js
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-helpers-user_helper_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/flog.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/models/event.txt
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/report.yml
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/application_controller.txt
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-controllers-users_controller_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-helpers-session_helper_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-models-user_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/.idea/workspace.xml
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-controllers-application_controller_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/app/controllers/events_controller.rb
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/roodi.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-helpers-application_helper_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-models-event_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/roodi.js
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage/app-models-event_instance_rb.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/db/test.sqlite3
+    :times_changed: 4
+  - :file_path: milloinviimeksi/coverage.data
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/output/index.html
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/stats/stats.txt
+    :times_changed: 4
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/event_instances_controller.txt
+    :times_changed: 4
+  - :file_path: milloinviimeksi/Rakefile
+    :times_changed: 4
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/models/user.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/controllers/application_controller.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/config/database.yml
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/controllers/event_instances_controller.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/users/new.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/spec/model/user_spec.rb
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/users/show.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/models/event_instance.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/models/event.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/index_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/controllers/sessions_controller.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/features/event.feature
+    :times_changed: 3
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/models/event_instance.txt
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/controllers/events_controller.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/events/index.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/events/new.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/users_controller.txt
+    :times_changed: 3
+  - :file_path: milloinviimeksi/features/step_definitions/event_steps.rb
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/helpers/session_helper.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/features/support/paths.rb
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/layouts/application.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/public/stylesheets/style.css
+    :times_changed: 3
+  - :file_path: milloinviimeksi/app/models/event.rb
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/users/edit.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/controllers/sessions_controller.txt
+    :times_changed: 3
+  - :file_path: milloinviimeksi/features/login.feature
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/users/destroy.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/events/show.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/sessions/show.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/tmp/metric_fu/scratch/flog/app/models/user.txt
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/controllers/users_controller.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/event_instances/index.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/helpers/application_helper.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/app/controllers/users_controller.rb
+    :times_changed: 3
+  - :file_path: milloinviimeksi/app/controllers/event_instances_controller.rb
+    :times_changed: 3
+  - :file_path: milloinviimeksi/features/event_instances.feature
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/helpers/user_helper.rb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/users/create.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/scratch_directory/saikuro/app/views/users/update.html.erb_cyclo.html
+    :times_changed: 3
+  - :file_path: milloinviimeksi/app/views/events/new.html.erb
+    :times_changed: 3
+  :class_churn: []
 
 :roodi: 
   :total: 

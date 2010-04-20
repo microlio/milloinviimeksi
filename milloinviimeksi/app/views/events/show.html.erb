@@ -3,19 +3,23 @@
 
 <p><%= @event.description %></p>
 
-<h3><%= @event.event_instances.size>0 ? @event.event_instances.size : 'No' %> occasion<%= 's' if @event.event_instances.size != 1 %>:</h3>
+<h3><%= @event.event_instances.size>0 ? @event.event_instances.size : 'No' %> occasion<%= 's' if @event.event_instances.size != 1 %></h3>
 
-<ul>
+<dl class = "eventList">
 <% @event.event_instances.each do |instance|%>
-    <li><%= instance.time %> <%= link_to( 'Delete', [@event, instance], :method => :delete, :confirm => "Are you sure?") %></li>
+    <dt class = "eventListInstance"><%= instance.time %> <%= link_to( 'Delete', [@event, instance], :method => :delete, :confirm => "Are you sure?") %></dt>
+
 <% end %>
-<li>
+<dt>
+<div class = "eventListAdd">
+	<h4>Add new occasion</h4>
   <% form_for([@event, @event_instance]) do |f| %>
   <%= f.error_messages %>
     <%= f.datetime_select :time %>
     <%= f.submit 'Add occasion' %>
   <% end %>
-</li>
-</ul>
+</div>
 <p><%= link_to 'Remove this event', @event, :method => :delete, :confirm => "Are you sure?" %></p>
 <p><%= link_to 'Back', events_path %></p>
+</dt>
+</dl>

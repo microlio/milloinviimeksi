@@ -1,23 +1,23 @@
 <h1>When did you...</h1>
 
-<ul>
+<dl class = "eventList">
 
 <% @events.each do |event| %>
-  <li>
-    <h2><%= link_to event.name, event %></h2>
-    <p><% if event.event_instances.last %>
+  <dt class = "eventListInstance">
+    <%= link_to event.name, event %> </dt>
+    <dd><% if event.event_instances.last %>
     <b><%= event.event_instances.last.time.strftime('%c') %></b> <% if event.event_instances.size > 1 %>and <%= (event.event_instances.size - 1) %> other times<% end %>  
     <% else %>
     never
     <% end %>
-    </p>
-  </li>
+    </dd>
 <% end %>
-<li>
+<dt class = "eventListAdd">
+	<b>Create new event</b>
     <%= render :partial => "form" %>
-</li>
-</ul>
+</dt>
 
+</dl>
 
 
 <!--<%= link_to 'New event', new_event_path %>-->

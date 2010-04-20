@@ -4,42 +4,42 @@
     10.8: User#none
      2.4: validates_presence_of
      2.4: attr_accessor
-     1.2: private
      1.2: validates_uniqueness_of
-     1.2: validates_confirmation_of
      1.2: before_save
+     1.2: private
      1.2: before_create
+     1.2: validates_confirmation_of
     10.2: User#hash_password
      3.0: password
      2.8: salt
      2.6: branch
      1.4: create_salt
-     1.3: assignment
      1.3: blank?
+     1.3: assignment
      1.3: hash_plaintext_password
      6.4: User#authenticate
      2.6: branch
      1.6: new
      1.4: correct_password?
      1.4: raise
-     1.3: assignment
      1.3: find_by_name
+     1.3: assignment
      6.0: User#correct_password?
      1.7: salt
      1.5: hashed_password
      1.5: hash_plaintext_password
      1.3: ==
      5.7: User#create_salt
-     1.5: now
      1.5: current
+     1.5: now
      1.3: object_id
-     1.3: assignment
      1.3: strftime
+     1.3: assignment
      5.7: User#hash_plaintext_password
      2.6: <<
+     1.3: to_s
      1.3: assignment
      1.3: new
-     1.3: to_s
      0.4: lit_fixnum
      1.1: main#none
      1.1: require

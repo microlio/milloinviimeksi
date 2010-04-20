@@ -4,14 +4,122 @@ section{
 
 .warning, .error{
 	background-color: pink;
-	border: thin solid red;
+	border: medium solid red;
 	padding: 0.5em;
 	
 }
 
 .notice{
 	background-color: #CFC;;
-	border: thin solid green;
+	border: medium solid green;
 	padding: 0.5em;
-	
+}
+
+#status {
+	position: fixed;
+	top: 0%;
+	border: thin solid black;
+	padding: 10px;
+	width: 60%;
+	left: 20%;
+	vertical-align: middle;
+	text-align: center;
+	height: 7%;
+	background-color: CornflowerBlue;
+	z-index: 1;
+}
+
+#content {
+	border: thin solid black;
+	overflow: auto;
+	padding: 10px;
+	width: 60%;
+	height: auto;
+	position: absolute;
+	top: 12%;
+	left: 20%;
+	background-color: #FFFFFF;
+	line-height: 1.5;
+	bottom: 7%;
+	z-index: 0;
+}
+
+#notifications {
+/*	border: thin solid blue; */
+	position: relative;
+	padding: 10px;
+	width: 97%;
+	vertical-align: middle;
+	text-align: center;
+	height: 10%;
+	left: 0%;
+}
+
+#footer {
+	position: fixed;
+	width: 60%;
+	padding: 10px;
+	height: 2%;
+	left: 20%;
+	float: bottom;
+	text-align: center;
+	vertical-align: middle;
+	bottom: 0px;
+	border: thin solid black;
+	background-color: Gainsboro;
+	z-index: 1;
+	font-size: 14;
+}
+
+.eventList {
+
+}
+
+.eventListInstance {
+	background-color: WhiteSmoke;
+	padding: 5px;
+	margin: 5px;
+}
+
+.eventListAdd {
+	padding: 5px;
+	margin: 35px 5px 5px 5px;
+	border: medium dotted Gainsboro; 
+}
+
+.Lform {
+	padding: 3px;
+}
+
+body {
+	background-color: #F1F1F1;
+	width: 99%;
+	min-height: 500px;
+}
+
+li {
+	background-color: silver;
+	list-style: none;
+}
+
+dd {
+	margin-left: 0.6em;
+}
+
+a:hover {
+	font-weight: bold;
+}
+
+a:visited {
+	color: darkBlue;
+	text-decoration: none;
+}
+
+a:link {
+	color: darkBlue;
+	text-decoration: none;
+}
+
+a:active {
+	color: sienna;
 }

@@ -1,20 +1,35 @@
 <html>
 <head>
     <%= stylesheet_link_tag 'style' %>
-    <title>milloin viimeex</title>
+    <title>Milloin viimeeX</title>
 </head>
 <body>
+	<div id = "status">
     <% if session[:user_id]%>
         <p>You are logged in <%= link_to 'Logout', :session, :method => :delete %></p>
     <% end %>
+	</div>
     
+	<div id = "content">
+
+	<% if flash[:warning] or flash[:notice] %>
+		<div id = "notifications">
+	<% end %>
+	
     <% if flash[:warning] %>
     	<section class="warning"><%= flash[:warning]%></section>
     <% end %>
     <% if flash[:notice] %>
     	<section class="notice"><%= flash[:notice]%></section>
     <% end %>
-    
-    <%= yield %>
+	<% if flash[:warning] or flash[:notice] %>
+		</div>
+	<% end %>
+
+		<%= yield %>
+	</div>
+	<div id = "footer">
+		Team Milloinviimeks, 2010
+	</div>
 </body>
 </html>

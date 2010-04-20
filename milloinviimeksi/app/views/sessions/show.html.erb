@@ -1,18 +1,28 @@
+<div class = "Lform">
   <h1>Login</h1>
-
+</div>
   <% form_for :user do |f| %>
     <%= f.error_messages %>
 
-  <div>
+  <div class = "Lform">
     <%= f.label :name %>
+	</div>
+	<div class = "Lform">
     <%= f.text_field :name %>
   </div>
 
-  <div>
+  <div class = "Lform">
     <%= f.label :password %>
+	</div>
+	<div class = "Lform">
     <%= f.password_field :password %>
   </div>
-
-      <%= f.submit 'Login' %> <%= link_to 'Register', new_user_path %>
+	
+	<div class = "Lform">
+      <%= f.submit 'Login' %> 
+	</div>
+	<div class = "Lform">
+	<%= link_to 'Register', new_user_path %>
+	</div>
 
   <% end %>
