@@ -7,12 +7,12 @@ class SessionsController < ApplicationController
     begin
       user = User.authenticate(params[:user][:name], params[:user][:password])
     rescue
-      flash[:warning] = 'You shall not pass!'
+      flash[:warning] = 'Incorrect username or password!'
       redirect_to :root
       return
     end
 
-    flash[:notice] = 'Multipass!'
+    flash[:notice] = 'Welcome ' + user.name
     log_user_in user
     redirect_to :root
 
