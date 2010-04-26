@@ -4,11 +4,13 @@
     <title>Milloin viimeeX</title>
 </head>
 <body>
-	<div id = "status">
+    <header>
     <% if session[:user_id]%>
-        <p>You are logged in <%= link_to 'Logout', :session, :method => :delete %></p>
-    <% end %>
+	<div id = "status">
+        You are logged in <%= link_to 'Logout', :session, :method => :delete %>
 	</div>
+    <% end %>
+    </header>
     
 	<div id = "content">
 

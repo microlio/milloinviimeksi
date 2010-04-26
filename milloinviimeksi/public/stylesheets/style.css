@@ -15,7 +15,8 @@ section{
 	padding: 0.5em;
 }
 
-#status {
+header {
+  display: block;
 	position: fixed;
 	top: 0%;
 	border: thin solid black;
@@ -27,6 +28,28 @@ section{
 	height: 7%;
 	background-color: CornflowerBlue;
 	z-index: 1;
+}
+
+#status{
+  position: absolute;
+
+  top: 2px;
+  right: 2px;
+
+
+}
+#status a{
+  display: inline-block;
+  border: thin solid black;
+  background-color: white;
+  padding: 4px;
+}
+
+#status a:hover{
+  border: thin solid navy;
+  background-color: navy;
+  color: white;
+  font-weight: normal;
 }
 
 #content {

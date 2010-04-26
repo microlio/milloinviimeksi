@@ -7,7 +7,7 @@
 
 <dl class = "eventList">
 <% @event.event_instances.each do |instance|%>
-    <dt class = "eventListInstance"><%= instance.time %> <%= link_to( 'Delete', [@event, instance], :method => :delete, :confirm => "Are you sure?") %></dt>
+    <dt class = "eventListInstance"><%= instance.time %> <%= link_to( 'Delete occasion', [@event, instance], :method => :delete, :confirm => "Are you sure?") %></dt>
 
 <% end %>
 <dt>
