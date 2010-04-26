@@ -20770,3 +20770,54 @@ Rendering events/index
   [4;35;1mEventInstance Load (0.2ms)[0m   [0mSELECT * FROM "event_instances" WHERE ("event_instances".event_id = 1) ORDER BY time DESC LIMIT 1[0m
 Rendered events/_form (2.0ms)
 Completed in 45ms (View: 19, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-04-26 13:09:56) [DELETE]
+  Parameters: {"authenticity_token"=>"zhfI+BkUY4lhBIzbnmp+1es/Osk0DTYoORGuKJ4pUNY="}
+Redirected to http://localhost:3000/
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/session]
+
+
+Processing EventsController#index (for 127.0.0.1 at 2010-04-26 13:09:56) [GET]
+Redirected to http://localhost:3000/session
+Filter chain halted as [:authenticate_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+
+
+Processing SessionsController#show (for 127.0.0.1 at 2010-04-26 13:09:56) [GET]
+Rendering template within layouts/application
+Rendering sessions/show
+Completed in 5ms (View: 3, DB: 0) | 200 OK [http://localhost/session]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (3.6ms)[0m   [0;1mCREATE TABLE "event_instances" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer, "time" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime, "description" text, "user_id" integer) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (3.5ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "salt" varchar(255), "hashed_password" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (1.9ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM "schema_migrations"[0m
+  [4;36;1mSQL (3.5ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100426092429')[0m
+  [4;35;1mSQL (18.9ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100325122256')[0m
+  [4;36;1mSQL (1.5ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100328152048')[0m
+  [4;35;1mSQL (1.5ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100329123847')[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100329124741')[0m
+  [4;35;1mSQL (5.1ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100415080515')[0m

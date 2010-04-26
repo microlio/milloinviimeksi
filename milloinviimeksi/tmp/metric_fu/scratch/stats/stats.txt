@@ -1,15 +1,15 @@
-(in /Users/sabba/RubymineProjects/milloinviimeksi)
+(in /Users/juki/Desktop/milloinviimeksi/milloinviimeksi)
 +----------------------+-------+-------+---------+---------+-----+-------+
 | Name                 | Lines |   LOC | Classes | Methods | M/C | LOC/M |
 +----------------------+-------+-------+---------+---------+-----+-------+
-| Controllers          |   171 |   102 |       5 |      21 |   4 |     2 |
+| Controllers          |   176 |   106 |       5 |      22 |   4 |     2 |
 | Helpers              |     7 |     6 |       0 |       0 |   0 |     0 |
-| Models               |    66 |    47 |       3 |       6 |   2 |     5 |
+| Models               |    68 |    49 |       3 |       6 |   2 |     6 |
 | Libraries            |     0 |     0 |       0 |       0 |   0 |     0 |
 | Functional tests     |    16 |    12 |       2 |       0 |   0 |     0 |
 | Unit tests           |    16 |    12 |       3 |       0 |   0 |     0 |
 +----------------------+-------+-------+---------+---------+-----+-------+
-| Total                |   276 |   179 |      13 |      27 |   2 |     4 |
+| Total                |   283 |   185 |      13 |      28 |   2 |     4 |
 +----------------------+-------+-------+---------+---------+-----+-------+
-  Code LOC: 155     Test LOC: 24     Code to Test Ratio: 1:0.2
+  Code LOC: 161     Test LOC: 24     Code to Test Ratio: 1:0.1
 

@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-user_rb.html">app/models/user.rb</a></td>
-            <td class='right_align'><tt>52</tt></td>
-            <td class='right_align'><tt>36</tt></td>
+            <td class='right_align'><tt>54</tt></td>
+            <td class='right_align'><tt>37</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -123,7 +123,7 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line12">12</a>   </pre></td>
+            <td><pre><a name="line12">12</a> </pre></td>
           </tr>
         
           
@@ -158,8 +158,8 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line18">18</a> # u = User.new :name =&gt; 'kisu', :password =&gt; 'kisu'</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line18">18</a>   has_many :events, :order =&gt; &quot;created_at&quot;, :dependent =&gt; :destroy</pre></td>
           </tr>
         
           
@@ -170,32 +170,32 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line20">20</a>   def correct_password? pwd</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line21">21</a>     return User.hash_plaintext_password(pwd, self.salt) == hashed_password</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line20">20</a> # u = User.new :name =&gt; 'kisu', :password =&gt; 'kisu'</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line22">22</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line23">23</a> </pre></td>
+            <td><pre><a name="line21">21</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line24">24</a>   private</pre></td>
+            <td><pre><a name="line22">22</a>   def correct_password? pwd</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line23">23</a>     return User.hash_plaintext_password(pwd, self.salt) == hashed_password</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a>   end</pre></td>
           </tr>
         
           
@@ -207,169 +207,181 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line26">26</a>   def self.hash_plaintext_password pwd, salt</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line27">27</a>     crypter = Digest::SHA2.new(512)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line28">28</a>     crypter &lt;&lt; salt</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line29">29</a>     crypter &lt;&lt; pwd</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line30">30</a>     crypter.to_s</pre></td>
+            <td><pre><a name="line26">26</a>   private</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line31">31</a>   end</pre></td>
+            <td><pre><a name="line27">27</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line28">28</a>   def self.hash_plaintext_password pwd, salt</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line29">29</a>     crypter = Digest::SHA2.new(512)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line30">30</a>     crypter &lt;&lt; salt</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line31">31</a>     crypter &lt;&lt; pwd</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line32">32</a>     crypter.to_s</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line32">32</a> </pre></td>
+            <td><pre><a name="line33">33</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line33">33</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line34">34</a>   def create_salt</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line35">35</a>     self.salt = &quot;#{Time.now.strftime('%s')}#{Thread.current.object_id}&quot;</pre></td>
+            <td><pre><a name="line34">34</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line36">36</a>   end</pre></td>
+            <td><pre><a name="line35">35</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line36">36</a>   def create_salt</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line37">37</a>     self.salt = &quot;#{Time.now.strftime('%s')}#{Thread.current.object_id}&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line37">37</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line38">38</a>   def hash_password</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line39">39</a>     return if self.password.blank?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line40">40</a>     create_salt unless salt</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line41">41</a>     self.hashed_password = User.hash_plaintext_password(self.password, self.salt)</pre></td>
+            <td><pre><a name="line38">38</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line42">42</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line43">43</a> </pre></td>
+            <td><pre><a name="line39">39</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line44">44</a>   def self.authenticate name, password</pre></td>
+            <td><pre><a name="line40">40</a>   def hash_password</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line45">45</a>     user = User.find_by_name name</pre></td>
+            <td><pre><a name="line41">41</a>     return if self.password.blank?</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line46">46</a>     unless user and user.correct_password? password</pre></td>
+            <td><pre><a name="line42">42</a>     create_salt unless salt</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line47">47</a>       raise ArgumentError.new &quot;Authentication failed&quot;</pre></td>
+            <td><pre><a name="line43">43</a>     self.hashed_password = User.hash_plaintext_password(self.password, self.salt)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line48">48</a>     end</pre></td>
+            <td><pre><a name="line44">44</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line45">45</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line49">49</a>     return user</pre></td>
+            <td><pre><a name="line46">46</a>   def self.authenticate name, password</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line47">47</a>     user = User.find_by_name name</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line48">48</a>     unless user and user.correct_password? password</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line49">49</a>       raise ArgumentError.new &quot;Authentication failed&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line50">50</a> </pre></td>
+            <td><pre><a name="line50">50</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line51">51</a>     return user</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line51">51</a>   end</pre></td>
+            <td><pre><a name="line52">52</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line52">52</a> end</pre></td>
+            <td><pre><a name="line53">53</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Mon Apr 19 13:58:52 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Mon Apr 26 13:08:49 +0300 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>
