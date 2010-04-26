@@ -17,7 +17,7 @@ Feature: Login
         When I fill in "name" with "kisu"
         And I fill in "password" with "something other"
         And I press "Login"
-        Then I should see "You shall not pass"
+        Then I should see "Incorrect username or password!"
 
     Scenario: Logout
         Given I am logged in as "kisu"
