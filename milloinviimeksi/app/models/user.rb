@@ -9,11 +9,13 @@ class User < ActiveRecord::Base
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password
-  
+
   validates_presence_of :password
 
   before_create :create_salt
   before_save :hash_password
+
+  has_many :events, :order => "created_at", :dependent => :destroy
 
 # u = User.new :name => 'kisu', :password => 'kisu'
 

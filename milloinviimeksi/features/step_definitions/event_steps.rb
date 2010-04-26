@@ -1,12 +1,14 @@
-Given /^an event named "(.*)" exists$/ do |name|
+Given /^an event named "(.*)" exists for user "(.*)"$/ do |name, user|
   Event.create!(
-    :name => name
+    :name => name,
+    :user => User.find_by_name(user)
   )
 end
 
-Given /^an event named "(.*)" with (\d+) occasion(?:|s) exists$/ do |name, times|
+Given /^an event named "(.*)" with (\d+) occasion(?:|s) exists for user "(.*)"$/ do |name, times, user|
   ev = Event.create!(
-    :name => name
+    :name => name,
+    :user => User.find_by_name(user)
   )
   times.to_i.times do |i|
     EventInstance.create!(

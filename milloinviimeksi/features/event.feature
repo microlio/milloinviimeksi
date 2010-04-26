@@ -20,7 +20,7 @@ Feature: Events
     
     Scenario: Destroy existing
         Given I am logged in as "kisu"
-        And an event named "Happenign" exists
+        And an event named "Happenign" exists for user "kisu"
         And I am on the events page
         And I follow "Happenign"
         When I follow "Remove this event"
@@ -35,3 +35,12 @@ Feature: Events
         Then I should see "Event was successfully created."
         And I should see "new event"
         And I should see "new desc"
+        
+    Scenario: Can see only my events
+        Given I am logged in as "kisu"
+        Given a user named "alabaster" with password "Shub-Niggurath" exists
+        And an event named "Happenign" exists for user "kisu"
+        And an event named "Morogahna" exists for user "alabasster"
+        When I am on the events page
+        Then I should see "Happenign"
+        And I should not see "Morogahna"

@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     session[:user_id]
   end
 
+  def current_user
+    return User.find_by_id logged_in? if logged_in?
+  end
+
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 end
