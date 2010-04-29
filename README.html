@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<style type="text/css">
+	body{
+    font-family: "Helvetica", sans-serif;  
+	}
+	
+	table{
+		margin: 1em 0;
+	}
+
+	p{
+		margin-bottom: 0;
+	}
+	
+	ul li p, ol li p {
+		text-indent: 0;
+		margin-top: 0.5em;
+	}
+
+	a[href]{
+		text-decoration: none;
+	}
+	a[href]:hover {
+		text-decoration: underline;
+	}
+	
+	table{
+		border-collapse: collapse;
+		
+	}
+	th, td{
+		padding: 0.2em;
+		border: thin solid rgba(0, 0, 0, 0.1);
+	}
+	
+	blockquote{
+    border: thin solid #ddd;
+    border-left: thick solid #ddd;
+		padding: 0.5em;
+		margin: 0.5em 0em;
+    background-color: #fafafa;
+
+	}
+	
+	blockquote > *:first-child{
+	  padding-top: 0;
+	  margin-top: 0;
+	}
+
+	blockquote > *:last-child{
+	  padding-bottom: 0;
+	  margin-bottom: 0;
+	}
+
+	img{
+	  vertical-align: text-top;
+	}
+
+	img[src$="pdf"]{
+		border: thin solid silver;
+	}
+
+	pre{
+		font-family: "GNU Unifont", monospace;
+		color: gray;
+		font-size: 12px;
+		background-color: #fafafa;
+		border: thin solid #ddd;
+		padding: 0.5em;
+	}
+</style>
+<title>README</title>
+<meta name="viewport" content="initial-scale=1">
+</head>
+<body>
+<ul>
+<li><a href="#generated-id-4157600">README</a></li>
+<li><a href="#generated-id-28526096">Kokoukset</a></li>
+<li><a href="#generated-id-28528304">18.3. torstai</a></li>
+<li><a href="#generated-id-28466672">25.3. torstai</a></li>
+<li><a href="#generated-id-28576368">29.3. maanantai</a></li>
+<li><a href="#generated-id-28320800">8.4. torstai</a></li>
+<li><a href="#generated-id-4164960">12.4. maanantai</a></li>
+<li><a href="#generated-id-3855536">16.4. perjantai</a></li>
+<li><a href="#generated-id-28322528">19.4. maanantai</a></li>
+<li><a href="#generated-id-28315024">22.4. torstai</a></li>
+<li><a href="#generated-id-4168608">26.4. maanantai</a></li>
+<li><a href="#generated-id-28335824">29.4. torstai</a></li>
+<li><a href="#generated-id-28600176">Mitä palautetaan?</a></li>
+<li><a href="#generated-id-4148640">Powerpointit</a></li>
+<li><a href="#generated-id-28570960">Dokkarit</a></li>
+<li><a href="#generated-id-4144288">Metriikat</a></li>
+</ul>
+<nav><ul id="toc"></ul></nav><h1 id="generated-id-4157600">README</h1>
+
+<p>Projektissa toteutettiin Milloinviimeeksi-websovellus, jonka avulla on
+mahdollista seurata milloin on tehnyt erilaisia asioita. Esimerkiksi
+sovelluksen avulla voi seurata milloin on viimeksi vaihtanut palovaroittimen
+pariston.</p>
+
+<p>Websovellus on toteutettu Ruby on Rails -sovelluskehyksen päälle. Käytetty rails-versio on 2.3.5 ja ruby-versio ruby-1.8.7-p249.</p>
+
+<p>Lisäksi projektissa pohdiskeltiin erilaisia ketteriin projekteihin liittyviä kysymyksiä.</p>
+
+<h2 id="generated-id-28526096">Kokoukset</h2>
+
+<h3 id="generated-id-28528304">18.3. torstai</h3>
+
+<pre><code>Ensimmäinen tapaaminen 18.3.2010
+
+Kokous aloitettiin 12:15.
+
+  Sihteerinä: Mikko Johansson
+
+  Jäsenet tutustuivat toisiinsa
+    Ville Palkosaari
+    Sabir Samaletdin
+    Juho Kilpikoski
+    Mikko Johansson
+
+ Tehtävä ohjelmisto (vaatimukset, määrittely ja nimi)
+    MILLOIN VIIMEKSI
+    - Rails-ohjelmiston asentaminen
+    - Kirjautuminen (sisään/ulos)
+    - Käyttäjän tapahtumien hallinta
+        lisää/muokkaa/poista - hallinointi (admin)
+    - Käyttäjän tapahtumien instanssien hallinta
+        lisää/muokkaa/poista - hallinointi (admin)
+    - Käyttäjien hallinta
+        lisää/muokkaa/poista - hallinointi (admin)
+    - Tapahtuman muistutuksien hallinta
+        lisää/muokkaa/poista
+
+  Tekniikat
+    * Rails
+    * SQLite
+
+  Määrittely
+    Rails-ohjelmiston asentaminen
+      * Kehitystä varten asennetaan versio
+    Kirjautuminen (high)
+      * Vaatii käyttäjähallinnan
+      * Mahdollistaa yksityisemmän tiedon
+    Käyttäjän tapahtumien hallinta (medium)
+      * Jokaisella käyttäjällä on omat tapahtumat, jotka eivät näy julkisesti
+    Käyttäjän tapahtumien instanssien hallinta (low)
+      * Tapahtumiin kiinnitetään tietty aika ja tehdään sen mukaan instanssi
+      * Instanssiin kiinnitetään mahdollinen muistutus
+    Käyttäjien hallinta (high)
+      * Käyttäjän rekisteröityminen kirjautumista varten
+      * Käyttäjälle omat tapahtumat ja niiden instanssit
+    Tapahtumien muistutuksien hallinta (very low priority)
+      * Tapahtumassa voi olla muistutus, joka hälyttää annetun ajan jälkeen
+    Admin-hallinnointi? - ei tule (päätettiin)
+
+  Ryhmän nimi sovittiin: milloinviimeks.
+  Ryhmä luotiin: groups.google.com.
+  Luotiin alustavat pohjat dokumenteille kaikille saatavaksi docs.google.com.
+  Suunniteltiin alustavasti osa käyttöliittymän näkymistä.
+  Mietittiin teemaa laatu ketterissä prosesseissa (laatu ketterissä prosesseissa).
+
+Suunniteltiin 1. Sprint
+    - rails-ympäristön asentaminen 2h (RubyMine, SQLite3, ruby, rubygems, rails..)
+    Käyttäjä (user, session)
+    - tietomallin suunnitteleminen 15min
+    - tietomallin toteuttaminen 15min
+    - User-controller suunnitteleminen ja toteuttaminen 15min
+    - käyttöliittymä kirjautumiselle 10min
+    - toiminta kirjautumiseen 15min
+    - kirjautumisen testaus 15min
+
+  Sovittiin tapaamisajaksi torstaisin 14-16.
+
+Lopetettiin kokous 13:45
+</code></pre>
+
+<h3 id="generated-id-28466672">25.3. torstai</h3>
+
+<pre><code>Toinen tapaaminen 25.3.2010
+
+Kokous aloitettiin 14:00.
+
+25.3.2010 tehdyt asiat logissa.
+
+Suunniteltiin 2. Sprint
+    Käyttäjä (user, session)
+    - uloskirjautuminen
+    Tapahtuma (event)
+    - tietomallin suunnitteleminen
+    - tietomallin toteuttaminen
+    - Event-controllin suunnitteleminen ja toteuttaminen
+    - Käyttöliittymä tapahtuman lisäämiseen
+
+
+Käytiin läpi TEEMA 1-dokumentti ja palauteltiin mieleen asioita.
+
+Lopetettiin kokous 16:00.
+</code></pre>
+
+<h3 id="generated-id-28576368">29.3. maanantai</h3>
+
+<pre><code>Avattiin kokous
+
+Todettiin paikallaolijat: Sabir Samaletdin, Mikko Johansson, Ville Palkosaari, Juho Kilpikoski
+
+1. Käytiin läpi sprint-backlog ja sovittiin tehtävät
+</code></pre>
+
+<h3 id="generated-id-28320800">8.4. torstai</h3>
+
+<pre><code>Avattiin kokous
+
+Todettiin paikallaolijat: Sabir Samaletdin, Mikko Johansson, Ville Palkosaari, Juho Kilpikoski
+
+1. Käytiin läpi toteutetut tehtävät ja todettiin ne onnistuneiksi
+2. Vietiin seuraavan (3.) sprintin sprint-backlogiin seuraavat tehtävät:
+
+    Tapahtuma: Poisto, Kuvaus
+    Tapahtumainstanssi: Luonti, Poisto
+    Doku: CMMI ja ketterät prosessit
+    Doku: Oman prosessin kuvaus
+</code></pre>
+
+<h3 id="generated-id-4164960">12.4. maanantai</h3>
+
+<pre><code>Avattiin kokous
+
+Todettiin paikallaolijat: Sabir Samaletdin, Mikko Johansson, Ville Palkosaari, Juho Kilpikoski
+
+1. Käytiin läpi sprint-backlog ja sovittiin tehtävät
+</code></pre>
+
+<h3 id="generated-id-3855536">16.4. perjantai</h3>
+
+<pre><code>Kokous 16.4.2010
+
+Avattiin kokous
+
+Todettiin paikalla olijat: Sabir Samaletdin, Mikko Johansson, Ville Palkosaari, Juho Kilpikoski
+
+    CMMI dokumentin lopullinen viilaus ja kalvojen teko.
+    Prosessin kuvauksen viimeistely ja kalvojen teko.
+    Katselmoitiin koodi ja metriikka - Koodi täyttää vaatimukset.
+
+    2. Päätettiin koodata:
+        Käyttäjän rekisteröinti.
+        Käyttöliittymän ulkoasun parantaminen.
+        Varmistuskysymykset tapahtuman ja instanssin poistoon.
+</code></pre>
+
+<h3 id="generated-id-28322528">19.4. maanantai</h3>
+
+<pre><code>Kokous 19.4.2010
+
+Avattiin kokous
+
+Todettiin paikalla olijat: Sabir Samaletdin, Mikko Johansson, Ville Palkosaari, Juho Kilpikoski
+
+    1. Suunniteltiin käyttäjätestit ja niiden dokumentointi.
+    2. Käytiin läpi jo tehtyjä toimintoja. ja suunniteltiin vielä tehtäviä.
+
+         * Rekisteröityminen: 45min, toteutunut 45min
+         * Tapahtuman ja tapahtumainstanssin poistamisessa
+         * varmennus: 5min, toteutunut 5min
+         * Käyttöliittymän ulkoasun kohennus: 30min
+         * Käyttöliittymätestaus 3h
+         * Teema:
+               * Miten prosessit toimivat, kun projektissa on mukana satoja työntekijöitä?
+</code></pre>
+
+<h3 id="generated-id-28315024">22.4. torstai</h3>
+
+<pre><code>Avattiin kokous
+
+Todettiin paikallaolijat: Sabir Samaletdin, Ville Palkosaari, Juho Kilpikoski
+
+1. Käytiin läpi käytettävyystestin tulokset
+2. Käytiin läpi metriikoiden arvot
+3. Käytiin läpi sprintin muut tuotokset ja todettiin ne onnistuneiksi
+4. Vietiin seuraavan (5.) sprintin sprint-backlogiin seuraavat tehtävät:
+
+    Selvitetään havaitut käli-ongelmat, 2h
+    Muutetaan eventit ja instantit käyttäjäkohtaisiksi, 30min
+    Riskienhallinta ketterissä prosesseissa
+    Laatuyhteenveto
+    Viimeistellään dokumentit ja ohjelmisto palautuskuntoon
+</code></pre>
+
+<h3 id="generated-id-4168608">26.4. maanantai</h3>
+
+<pre><code>Avattiin kokous
+
+Todettiin paikallaolijat: Sabir Samaletdin, Mikko Johansson, Ville Palkosaari, Juho Kilpikoski
+
+1. Käytiin läpi sprint-backlog ja sovittiin tehtävät
+</code></pre>
+
+<h3 id="generated-id-28335824">29.4. torstai</h3>
+
+<pre><code>Avattiin kokous
+
+Todettiin paikalla olijat: Mikko Johansson, Ville Palkosaari, Juho Kilpikoski
+
+1. Käytiin läpi toteutetut tehtävät ja todettiin ne onnistuneiksi
+2. Käytiin läpi metriikoiden arvot
+3. Tarkastettiin palautettavat dokumentit
+</code></pre>
+
+<h2 id="generated-id-28600176">Mitä palautetaan?</h2>
+
+<h3 id="generated-id-4148640">Powerpointit</h3>
+
+<ul>
+<li>Laskarit 2</li>
+<li>Laskarit 3</li>
+<li>Laskarit 4</li>
+<li>Laskarit 5</li>
+</ul>
+<h3 id="generated-id-28570960">Dokkarit</h3>
+
+<ul>
+<li>TEEMA 1: Miten laatu nähdään ketterissä prosesseissa?</li>
+<li>Laadunvarmistus ja mittarit (Laadunvarmistus)</li>
+<li>'Oh-la-la' Next-level Scrum-like Agile Process</li>
+<li>Ketterien prosessien skaalautuvuus</li>
+<li>LOG</li>
+<li>Riskienhallinta ketterissä prosesseissa</li>
+<li>Laatuyhteenveto</li>
+<li>Virheloki</li>
+<li>Käyttöliittymätestaus</li>
+<li>Tämä: pöytäkirjat + sekalaista</li>
+<li>Riskidokumentti</li>
+</ul>
+<h3 id="generated-id-4144288">Metriikat</h3>
+
+<pre><code>rake rcov:all
+rake metrics:all
+</code></pre>
+
+<ul>
+<li>milloinviimeksi/milloinviimeksi/tmp/metric_fu/output/index.html</li>
+<li>milloinviimeksi/milloinviimeksi/coverage/index.html</li>
+</ul>
+<footer><hr>
+<p>Muo­kattu viimeeksi 29.04.2010 kello 15.56.11</p>
+</footer>
+</body>
+</html>
